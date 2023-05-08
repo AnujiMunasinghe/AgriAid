@@ -5,7 +5,7 @@ const http = require("http")
 
 const cors = require("cors");
 const mongoose = require("mongoose");
-const clusterURL = "mongodb+srv://chamith:9875@ictech.ly0widm.mongodb.net/AgriAID"
+const clusterURL = "mongodb+srv://admin:i5T3X5lWOSCj32ii@cluster0.5oe0dnt.mongodb.net/?retryWrites=true&w=majority"
 
 app.use(cors());
 app.use(express.json());

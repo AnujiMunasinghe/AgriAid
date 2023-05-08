@@ -1,0 +1,51 @@
+Crop,Region,Demand (per month),Supply  (per month),Price (per Kg),Demand (per month),Supply  (per month),Price (per Kg),Demand (per month),Supply  (per month),Price (per Kg)
+Capsicum,Colombo,105 800 kg,100 800 kg,Rs. 924.12,128 340 kg,127 983kg,Rs. 1003.10,142 500 kg,130 700 kg,830.8
+Capsicum,Puttalam,99 245 kg,98 564 kg,Rs. 840,131 356 kg,130 240 kg,Rs. 980,98 432kg,92 450 kg,800
+Capsicum,Jaffna,97 309 kg,95 345 kg,Rs. 841.67,105 835 kg,103 456 kg,Rs. 786.67,93 263 kg,88 460 kg,746.67
+Capsicum,Vavuniya,128 456 kg,124 679 kg,Rs. 680,112 398 kg,110 345 kg,Rs. 718,128 633 kg,108 487 kg,940
+Capsicum,Kilinochchi,130 493 kg,128 654 kg,Rs. 800,125 935 kg,124 534 kg,Rs. 800,83 320 kg,79 824 kg,802
+Capsicum,Mullaitivu,120 924 kg,118 230 kg,Rs. 706.67,954 738 kg,93 650 kg,Rs. 800,72 210 kg,63 433 kg,816.67
+Capsicum,Galle,128 340 kg,127 983kg,Rs. 730,99 245 kg,98 564 kg,Rs. 937.50,123 502 kg,120 754 kg,777.5
+Capsicum,Kandy,131 356 kg,130 240 kg,Rs. 980,97 309 kg,95 345 kg,Rs. 950,119 560 kg,117 100 kg,860
+Capsicum,Gampaha,105 835 kg,103 456 kg,Rs. 1000,128 456 kg,124 679 kg,Rs. 1060,118 200 kg,112 333 kg,825
+Capsicum,Kurunegala,112 398 kg,110 345 kg,Rs. 792,130 493 kg,128 654 kg,Rs. 980,125 300 kg,122 250 kg,892
+Capsicum,Anuradhapura,125 935 kg,124 534 kg,Rs. 840,120 924 kg,118 230 kg,Rs. 860,128 524kg,122 850 kg,815
+Capsicum,Matara,954 738 kg,93 650 kg,Rs. 785,67 930 kg,78 954 kg,Rs. 875,115 224 kg,112 842 kg,845
+Capsicum,Polonnaruwa,109 543 kg,115 670 kg,Rs. 760,124 512 kg,59 473 kg,Rs. 886,123 827 kg,120 580 kg,887
+Capsicum,Badulla,86 760 kg,98 587 kg,Rs. 900,124 330 kg,110 764 kg,Rs. 888,100 245 kg,98 324 kg,865
+Capsicum,Mannar,67 930 kg,78 954 kg,Rs. 800,111 500 kg,117 240 kg,Rs. 800,100 309 kg,95 385 kg,780
+Capsicum,Kalutara,124 512 kg,59 473 kg,Rs. 788,130 720 kg,102 453 kg,Rs. 944,122 476 kg,119 479 kg,866
+Capsicum,Batticaloa,124 330 kg,110 764 kg,Rs. 792,144 523kg,129 250 kg,Rs. 800,128 493 kg,126 644 kg,800
+Capsicum,Ratnapura,111 500 kg,117 240 kg,Rs. 768,105 994 kg,130 800 kg,Rs. 972,122 924 kg,119 130 kg,776
+Capsicum,Trincomalee,130 720 kg,102 453 kg,Rs. 744,119 887 kg,102 450 kg,Rs. 800,130 340 kg,127 973kg,646
+Capsicum,Hambantota,144 523kg,129 250 kg,Rs. 786,99 847 kg,115 670 kg,Rs. 740,133 346 kg,131 540 kg,764.44
+Capsicum,Nuwara Eliya,125 835 kg,103 456 kg,Rs. 824,105 835 kg,103 456 kg,Rs. 850,111 835 kg,110 226 kg,750
+Capsicum,Kegalle,112 338 kg,110 345 kg,Rs. 792,112 398 kg,110 345 kg,Rs. 792,115 278 kg,112 725 kg,684
+Capsicum,Monaragala,125 935 kg,124 534 kg,Rs. 824,125 935 kg,124 534 kg,Rs. 870,127 885 kg,124 724 kg,770
+Capsicum,Ampara,180 415 kg,185 348 kg,Rs. 480,954 738 kg,93 650 kg,Rs. 530,97 688 kg,96 666 kg,850
+Capsicum,Matala,145 263 kg,213 567 kg,Rs.420,117 294 kg,115 284 kg,Rs.530,119 281 kg,114 220 kg,830
+Green Chilli,Jaffna,253 880 kg,250 764 kg,Rs. 431.67,237 394 kg,234 856 kg,Rs. 140,248 336 kg,239 893 kg,Rs. 315
+Green Chilli,Vavuniya,248 905 kg,246 284 kg,Rs.464,248 905 kg,246 284 kg,Rs.180,221 345 kg,219 477 kg,Rs.400
+Green Chilli,Matala,164 374 kg,180 345 kg,Rs. 510,184 374 kg,180 345 kg,Rs. 325,211 345 kg,208 285 kg,Rs. 430
+Green Chilli,Kilinochchi,212 937 kg,219 245 kg,Rs. 530,222 937 kg,219 245 kg,Rs. 220,202 475 kg,195 448 kg,Rs. 404
+Green Chilli,Mullaitivu,225 884 kg,222 934 kg,Rs. 516.75,224 884 kg,222 934 kg,Rs. 226.87,225 163 kg,214 867 kg,Rs. 406.67
+Green Chilli,Galle,253 830 kg,250 764 kg,Rs. 480,234 835 kg,230 465 kg,Rs. 292,233 810 kg,220 964 kg,Rs. 424
+Green Chilli,Kandy,174 759 kg,173 678 kg,Rs. 720,225 884 kg,222 934 kg,Rs. 284,162 219 kg,143 638 kg,Rs. 492
+Green Chilli,Gampaha,198 832 kg,195 786 kg,Rs. 720,253 830 kg,250 764 kg,Rs. 364,199 807 kg,196 986 kg,Rs. 460
+Green Chilli,Kurunegala,209 713 kg,266 865 kg,Rs. 776,174 759 kg,173 678 kg,Rs. 350,212 883 kg,263 755 kg,Rs. 482
+Green Chilli,Anuradhapura,215 263 kg,213 567 kg,Rs. 684,198 832 kg,195 786 kg,Rs. 280,252 759 kg,249 627 kg,Rs. 440
+Green Chilli,Matara,253 880 kg,250 764 kg,Rs. 612,209 713 kg,266 865 kg,Rs. 260,232 395 kg,221 798 kg,Rs. 512.50
+Green Chilli,Polonnaruwa,174 340 kg,173 678 kg,Rs. 656,215 263 kg,213 567 kg,Rs. 254,228 635 kg,224 156 kg,Rs. 604
+Green Chilli,Badulla,198 810 kg,195 786 kg,Rs. 760,253 880 kg,250 764 kg,Rs. 320,221 935 kg,219 887 kg,Rs. 460
+Green Chilli,Mannar,209 430 kg,266 865 kg,Rs. 536,202 394 kg,199 227 kg,Rs. 340,198 494 kg,195 227 kg,Rs. 450
+Green Chilli,Kalutara,255 836 kg,248 637 kg,Rs. 675,230 492 kg,228 356 kg,Rs. 232,232 592 kg,229 856 kg,Rs. 434
+Green Chilli,Batticaloa,224 235 kg,221 567 kg,Rs. 480,245 384 kg,242 378 kg,Rs. 530,243 374 kg,242 878 kg,Rs. 400
+Green Chilli,Ratnapura,202 394 kg,199 227 kg,Rs. 700,218 283 kg,215 267 kg,Rs. 460,218 183 kg,215 367 kg,Rs. 514
+Green Chilli,Trincomalee,230 282 kg,228 356 kg,Rs. 576,237 394 kg,234 856 kg,Rs. 202,232 994 kg,231 886 kg,Rs. 372
+Green Chilli,Hambantota,245 424 kg,242 378 kg,Rs. 550,248 905 kg,246 284 kg,Rs. 360,246 905 kg,244 214 kg,Rs. 498
+Green Chilli,Nuwara Eliya,218 333 kg,215 267 kg,Rs. 696,184 374 kg,180 345 kg,Rs. 316,182 374 kg,178 375 kg,Rs. 470
+Green Chilli,Kegalle,250 356 kg,233 333 kg,Rs. 538,222 937 kg,219 245 kg,Rs. 384,220 957 kg,219 215 kg,Rs. 484
+Green Chilli,Monaragala,212 380 kg,210 567 kg,Rs. 788,224 884 kg,222 934 kg,Rs. 240,222 894 kg,220 134 kg,Rs. 440
+Green Chilli,Ampara,203 225 kg,198 245 kg,Rs. 680,234 835 kg,230 465 kg,Rs. 330,230 125 kg,228 905 kg,Rs. 595
+Green Chilli,Puttalam,200 415 kg,185 348 kg,Rs. 752,170 428 kg,160 367 kg,Rs. 304,175 828 kg,166 397 kg,Rs. 476
+Green Chilli,Colombo,215 263 kg,213 567 kg,Rs. 647.10,248 274 kg,244 835 kg,Rs. 358.62,240 174 kg,238 735 kg,Rs. 657.08

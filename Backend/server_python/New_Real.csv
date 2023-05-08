@@ -1,0 +1,51 @@
+Region,Crop,Demand (per month),Supply  (per month),Price (per Kg)
+Colombo,Capsicum,135 500 kg,120 200 kg,Rs. 731.92
+Puttalam,Capsicum,103 456 kg,89 400 kg,Rs. 712
+Jaffna,Capsicum,98 436 kg,93 457 kg,Rs. 386.67
+Vavuniya,Capsicum,109 643 kg,98 587 kg,Rs. 604
+Kilinochchi,Capsicum,84 760 kg,78 954 kg,Rs. 618
+Mullaitivu,Capsicum,67 830 kg,59 473 kg,Rs. 596
+Galle,Capsicum,114 502 kg,110 764 kg,Rs. 625
+Kandy,Capsicum,124 550 kg,117 240 kg,Rs. 720
+Gampaha,Capsicum,108 500 kg,102 453 kg,Rs. 600
+Kurunegala,Capsicum,130 500 kg,129 250 kg,Rs. 552
+Anuradhapura,Capsicum,131 523kg,130 800 kg,Rs. 640
+Matara,Capsicum,105 234 kg,102 450 kg,Rs. 637.50
+Polonnaruwa,Capsicum,119 567 kg,115 670 kg,Rs. 620
+Badulla,Capsicum,99 245 kg,98 564 kg,Rs. 632
+Mannar,Capsicum,97 309 kg,95 345 kg,Rs. 650
+Kalutara,Capsicum,128 456 kg,124 679 kg,Rs. 824
+Batticaloa,Capsicum,130 493 kg,128 654 kg,Rs. 608
+Ratnapura,Capsicum,120 924 kg,118 230 kg,Rs. 596
+Trincomalee,Capsicum,128 340 kg,127 983kg,Rs. 522
+Hambantota,Capsicum,131 356 kg,130 240 kg,Rs. 551.25
+Nuwara Eliya,Capsicum,105 835 kg,103 456 kg,Rs. 600
+Kegalle,Capsicum,112 398 kg,110 345 kg,Rs. 592
+Monaragala,Capsicum,125 935 kg,124 534 kg,Rs. 640
+Ampara,Capsicum,954 738 kg,93 650 kg,Rs. 655
+Matala,Capsicum,117 294 kg,115 284 kg,Rs.440
+Jaffna,Green Chilli,250 456 kg,233 333 kg,Rs. 330
+Vavuniya,Green Chilli,212 385 kg,210 567 kg,Rs.410
+Matala,Green Chilli,203 245 kg,198 245 kg,Rs. 630
+Kilinochchi,Green Chilli,200 435 kg,185 348 kg,Rs. 418
+Mullaitivu,Green Chilli,215 063 kg,213 567 kg,Rs. 416
+Galle,Green Chilli,253 840 kg,250 764 kg,Rs. 390
+Kandy,Green Chilli,174 259 kg,173 678 kg,Rs. 488
+Gampaha,Green Chilli,198 802 kg,195 786 kg,Rs. 550
+Kurunegala,Green Chilli,209 783 kg,266 865 kg,Rs. 460
+Anuradhapura,Green Chilli,255 769 kg,248 637 kg,Rs. 440
+Matara,Green Chilli,230 495 kg,225 678 kg,Rs. 507.50
+Polonnaruwa,Green Chilli,2324 755 kg,220 256 kg,Rs. 518
+Badulla,Green Chilli,224 975 kg,221 567 kg,Rs. 440
+Mannar,Green Chilli,202 394 kg,199 227 kg,Rs. 440
+Kalutara,Green Chilli,230 492 kg,228 356 kg,Rs. 420
+Batticaloa,Green Chilli,245 384 kg,242 378 kg,Rs. 408
+Ratnapura,Green Chilli,218 283 kg,215 267 kg,Rs. 590
+Trincomalee,Green Chilli,237 394 kg,234 856 kg,Rs. 452
+Hambantota,Green Chilli,248 905 kg,246 284 kg,Rs. 505.71
+Nuwara Eliya,Green Chilli,184 374 kg,180 345 kg,Rs. 480
+Kegalle,Green Chilli,222 937 kg,219 245 kg,Rs. 484
+Monaragala,Green Chilli,224 884 kg,222 934 kg,Rs. 440
+Ampara,Green Chilli,234 835 kg,230 465 kg,Rs. 500
+Puttalam,Green Chilli,170 428 kg,160 367 kg,Rs. 404
+Colombo,Green Chilli,248 274 kg,244 835 kg,Rs. 540.37

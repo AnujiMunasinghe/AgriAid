@@ -122,7 +122,6 @@ router.route("/removeUser").post(async (req, res) => {
     }
 })
 
-
 //Accepted users
 router.route("/acceptedUsers").post(async (req, res) => {
     const role = req.body.type;
@@ -144,4 +143,5 @@ router.route("/acceptedUsers").post(async (req, res) => {
 
     }
 })
+
 module.exports = router;

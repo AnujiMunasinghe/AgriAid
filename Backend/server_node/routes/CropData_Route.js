@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dataModel = require("../Models/CropData_Model")
+const dataModel = require("../models/CropData_Model")
 
 const Capsicum = require("../DataSets/Capsicum")
 const Chili = require("../DataSets/Chili")

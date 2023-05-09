@@ -1,4 +1,4 @@
-const dataModel = require("../Models/ChatModel")
+const dataModel = require("../models/ChatModel")
 const {Server} = require("socket.io")
 const moment = require('moment-timezone');
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dataModel = require("../Models/Cultivation_Model")
+const dataModel = require("../models/Cultivation_Model")
 
 //API-01
 //save cultivation

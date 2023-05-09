@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    default: "new",
+    default: "show",
   },
   created_date: {
     type: Date,

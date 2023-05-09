@@ -71,7 +71,7 @@ const FarmerRegister = ({ navigation }) => {
         else if (route.params == 1) {
             setRole('Professional')
             setHeader('Agricultural Professional Registration');
-            setTitle('Agriultural Professional ID');
+            setTitle('Agricultural Professional ID');
         }
         else if (route.params == 2) {
             setRole('Admin')

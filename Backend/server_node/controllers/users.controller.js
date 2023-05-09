@@ -1,5 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
-const dataModel = require('../models/dataModel/users.model');
+const dataModel = require('../models/users.model');
 
 exports.registerUser = async (req, res) => {
     try {
@@ -16,7 +16,7 @@ exports.registerUser = async (req, res) => {
         }
 
         const idPrefix = role.toUpperCase(); // Prefix the role in uppercase
-        const idSuffix = uuidv4().split("-").join("").substring(0, 4); // Generate a unique ID
+        const idSuffix = uuidv4().split("-").join("").substring(0, 6); // Generate a unique ID
         const id = `${idPrefix}_${idSuffix}`; // Combine the prefix and suffix to form the ID
 
         const newUser = new dataModel({
@@ -43,3 +43,20 @@ exports.registerUser = async (req, res) => {
         res.status(500).json({ status: "error", message: "Internal server error" });
     }
 };
+
+exports.getUserByEmail = async (req, res) => {
+    try {
+      const { email } = req.body;
+  
+      const user = await dataModel.findOne({ email });
+  
+      if (!user) {
+        return res.status(404).json({ status: "error", message: "User not found" });
+      }
+  
+      res.status(200).json({ status: "success", data: user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ status: "error", message: "Internal server error" });
+    }
+  };

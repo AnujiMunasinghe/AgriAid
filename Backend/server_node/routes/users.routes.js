@@ -1,13 +1,51 @@
 const express = require("express");
 const router = express.Router();
-const dataModel = require("../models/users.model")  
-const usersController = require("../controllers/users.controller");
+const dataModel = require("../models/users.model") 
+const { v4: uuidv4 } = require('uuid');
 
-router.post('/register', usersController.registerUser);
-router.get("/user/email", usersController.getUserByEmail);
+router.route('/register').post(async (req, res) => {
+    try {
+        const { name, designation, workplace, email, password, role, visible } = req.body;
 
-//API-02
-//check user's email and password to login process
+        if (!name || !email || !password) {
+            return res.status(400).json({ status: "error", message: "Missing required fields" });
+        }
+
+        const existingUser = await dataModel.findOne({ email });
+
+        if (existingUser) {
+            return res.status(409).json({ status: "error", message: "User already exists" });
+        }
+
+        const idPrefix = role.toUpperCase(); // Prefix the role in uppercase
+        const idSuffix = uuidv4().split("-").join("").substring(0, 6); // Generate a unique ID
+        const id = `${idPrefix}_${idSuffix}`; // Combine the prefix and suffix to form the ID
+
+        const newUser = new dataModel({
+            id,
+            name,
+            designation,
+            workplace,
+            email,
+            password,
+            role,
+            rating: 0,
+            status: visible,
+        });
+
+        const response = await newUser.save();
+
+        if (response) {
+            return res.status(201).json({ status: "success", message: "User registered successfully" });
+        }
+
+        throw new Error("Failed to save user");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: "error", message: "Internal server error" });
+    }
+})
+
 router.route("/login").post(async (req, res) => {
     try {
         const email = req.body.email
@@ -34,8 +72,6 @@ router.route("/login").post(async (req, res) => {
     }
 })
 
-
-//Crop advisory
 router.route("/advisiory").get(async (req, res) => {
 
     try {
@@ -54,8 +90,6 @@ router.route("/advisiory").get(async (req, res) => {
 
     }
 })
-
-//Get Crop advisior requests
 
 router.route("/adminRequests").get(async (req, res) => {
 
@@ -76,8 +110,6 @@ router.route("/adminRequests").get(async (req, res) => {
     }
 })
 
-
-//Aprove Agricultural professional requests
 router.route("/confirmRequest").put(async (req, res) => {
     console.log('Confirm Works')
     const id = req.body.id
@@ -100,8 +132,6 @@ router.route("/confirmRequest").put(async (req, res) => {
     }
 })
 
-
-//Delete an user
 router.route("/removeUser").post(async (req, res) => {
     const id = req.body.id
 
@@ -122,7 +152,6 @@ router.route("/removeUser").post(async (req, res) => {
     }
 })
 
-//Accepted users
 router.route("/acceptedUsers").post(async (req, res) => {
     const role = req.body.type;
     const status = req.body.status

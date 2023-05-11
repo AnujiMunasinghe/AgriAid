@@ -2,15 +2,15 @@ import React from 'react';
 import { useRoute } from '@react-navigation/native';
 
 import {
-  StyleSheet,
-  View,
-  Image,
-  Button
+    StyleSheet,
+    View,
+    Image,
+    Button
 } from 'react-native';
 
 import LongButton from '../../components/buttons/LongButton';
 
-const ChooseSign =( { navigation } )=> {
+const ChooseSign = ({ navigation }) => {
     const route = useRoute()
 
 
@@ -25,8 +25,8 @@ const ChooseSign =( { navigation } )=> {
 
             <View style={styles.buttonSet}>
                 <View style={styles.alignButtons}>
-                    <LongButton Title="Register" press_Action={()=> navigation.navigate('FarmerRegister', route.params)}></LongButton>
-                    <LongButton Title="Log In" press_Action={()=> navigation.navigate('FarmerLogin', route.params)}></LongButton>
+                    {route.params != 2 && <LongButton Title="Register" press_Action={() => navigation.navigate('FarmerRegister', route.params)}></LongButton>}
+                    <LongButton Title="Log In" press_Action={() => navigation.navigate('FarmerLogin', route.params)}></LongButton>
                 </View>
             </View>
         </View>
@@ -34,12 +34,12 @@ const ChooseSign =( { navigation } )=> {
 }
 
 const styles = StyleSheet.create({
-    body : {
+    body: {
         backgroundColor: '#005F41',
-        height:'100%'
+        height: '100%'
     },
 
-    logoBox : {
+    logoBox: {
         height: '50%',
         alignItems: 'center',
         justifyContent: 'center'
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         width: '80%'
     },
 
-    buttonSet : {
+    buttonSet: {
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
         backgroundColor: '#F8FBFA',
@@ -58,12 +58,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
 
-    alignButtons : {
+    alignButtons: {
         height: 200,
-        justifyContent:'space-around'
+        justifyContent: 'space-around'
     },
 
-    text : {
+    text: {
         color: 'black',
         fontSize: 50
     }

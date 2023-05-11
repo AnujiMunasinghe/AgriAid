@@ -2,12 +2,12 @@ import React from 'react';
 import UserMgmt from './UserMgmt';
 
 import {
-  StyleSheet,
-  View,
+    StyleSheet,
+    View,
 } from 'react-native';
 import BodyHeader from '../../components/headers/BodyHeader';
 
-const FarmerMgmt =( props )=> {
+const FarmerMgmt = (props) => {
 
     return (
         <View>
@@ -21,15 +21,15 @@ const styles = StyleSheet.create({
     button: {
         backgroundColor: 'white',
         alignItems: 'center',
-        justifyContent:'center',
-        height:25,
-        width:25,
-        borderRadius:30,
+        justifyContent: 'center',
+        height: 25,
+        width: 25,
+        borderRadius: 30,
     },
 
     icon: {
-        color:'black',
-        fontSize:19
+        color: 'black',
+        fontSize: 19
     }
 })
 

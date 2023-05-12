@@ -8,7 +8,7 @@ const SelectionDropdown = (props) => {
 
     const [selectedValue, setSelectedValue] = useState("");
 
-    
+
 
     return (
 
@@ -16,17 +16,18 @@ const SelectionDropdown = (props) => {
             <Text style={styles.label}>{props.Label}</Text>
 
             <View style={{ position: 'relative', zIndex: 3, marginTop: 5 }}>
-                <SelectList 
-                data={props.List} 
-                setSelected={props.Selected}
-                boxStyles={{backgroundColor:'white', alignItems:'center', paddingVertical:7, borderRadius:8, width:200}}
-                inputStyles={{fontSize:15, color:'grey'}}
-                dropdownStyles={{backgroundColor:'white', position:'absolute',zIndex:999, width:'100%', top:30,height:'auto', overflow:'scroll'}}
-                dropdownTextStyles={{color:'#4A4747', fontSize:14, marginTop:5}}
-                placeholder={props.Placeholder}
+                <SelectList
+                    data={props.List}
+                    setSelected={props.Selected}
+                    boxStyles={{ backgroundColor: 'white', alignItems: 'center', paddingVertical: 7, borderRadius: 8, width: 200 }}
+                    inputStyles={{ fontSize: 15, color: 'grey' }}
+                    dropdownStyles={{ backgroundColor: 'white', position: 'absolute', zIndex: 999, width: '100%', top: 30, height: 'auto', overflow: 'scroll' }}
+                    dropdownTextStyles={{ color: '#4A4747', fontSize: 14, marginTop: 5 }}
+                    placeholder={props.Placeholder}
+                    search={false}
                 >
-            </SelectList>
-               
+                </SelectList>
+
                 {/* <View>
                     <Picker
                         selectedValue={selectedValue}

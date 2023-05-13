@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dataModel = require("../Models/HarvestRecord_Model")
+const dataModel = require("../models/HarvestRecord_Model")
 
 //API-01
 //save harvested record data

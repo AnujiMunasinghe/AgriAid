@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-    StyleSheet,
-    TouchableOpacity,
-    View,
-    Text,
+    Image,
     ScrollView,
-    Image
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
 import { Calendar } from 'react-native-calendars';
@@ -17,6 +17,7 @@ const Management = (props) => {
     const [reload, setReload] = useState(false)
     const [step, setStep] = useState('')
     const [targetDays, setTargetDays] = useState()
+    const [selectedDate, setSelectedDate] = useState(null);
 
     const [activityTabs, setActivityTabs] = useState(false)
     const [todayActivities, setTodayActivities] = useState([])
@@ -216,7 +217,25 @@ const Management = (props) => {
         setTargetDays(result);
     }
 
+
     const selected_dayPressed = (date) => {
+        const dateString = date.dateString;
+
+        // Remove color from previously selected date
+        if (selectedDate && targetDays[selectedDate]) {
+            setTargetDays(prev => ({
+                ...prev,
+                [selectedDate]: { ...prev[selectedDate], selected: false, selectedColor: undefined }
+            }));
+        }
+
+        // Set color for newly selected date
+        setTargetDays(prev => ({
+            ...prev,
+            [dateString]: { ...prev[dateString], selected: true, marked: true, selectedColor: 'green' }
+        }));
+
+        setSelectedDate(dateString);
         try {
             const dots = targetDays[date.dateString].dots;
             const dotKeys = dots.map(dot => dot.key);
@@ -257,255 +276,279 @@ const Management = (props) => {
 
 
     return (
-        <View style={{ marginHorizontal: 10}}>
-                <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 8 }}>
-                    <Text style={styles.title}>Activity Calender</Text>
-                    <TouchableOpacity onPress={() => setReload(true)}><Image style={styles.options} source={require('../../../../../Assets/Icons/Refresh.png')} /></TouchableOpacity>
-                </View>
-                <View>
-                    <Calendar
-                        markingType={'multi-dot'}
-                        markedDates={targetDays}
-                        onDayPress={(day) => selected_dayPressed(day)}
-                    />
-                </View>
+        <View style={{ marginHorizontal: 10 }}>
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: 8 }}>
+                <Text style={styles.title}>Activity Calender</Text>
+                <TouchableOpacity onPress={() => setReload(true)}><Image style={styles.options} source={require('../../../../../Assets/Icons/Refresh.png')} /></TouchableOpacity>
+            </View>
+            <View>
+                <Calendar
+                    markingType={'multi-dot'}
+                    markedDates={targetDays}
+                    onDayPress={(day) => selected_dayPressed(day)}
+                />
+            </View>
 
-                {activityTabs && (
-                    <ScrollView style={{ height: 280 }}>
-                        <Text style={{ color: 'black', fontSize: 20, fontWeight: 800, marginTop: 15 }}>Daily Cultivation Workflow Tasks</Text>
-                        {todayActivities.map((activity, index) => {
-                            if (activity === 'weed') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setWeedExpand(!weedExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Weeding</Text>
+            {activityTabs && (
+                <ScrollView style={{ height: 280 }}>
+                    <Text style={{ color: 'black', fontSize: 20, fontWeight: 800, marginTop: 15 }}>Daily Cultivation Workflow Tasks</Text>
+                    {todayActivities.map((activity, index) => {
+                        if (activity === 'weed') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setWeedExpand(!weedExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked1 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked1 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked1 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Weeding</Text>
+                                        </View>
 
-                                            {!weedExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {weedExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-
-                                        </TouchableOpacity>
+                                        {!weedExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {weedExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.weeding.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.weeding.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked1 == 2 ? 'checked' : ''} onPress={() => setMarked1(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked1 == 3 ? 'checked' : ''} onPress={() => setMarked1(3)}></RadioButton.Item>
-                                                    </View>
+                                    </TouchableOpacity>
+
+                                    {weedExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.weeding.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.weeding.step}</Text>
+
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked1 == 2 ? 'checked' : ''} onPress={() => setMarked1(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked1 == 3 ? 'checked' : ''} onPress={() => setMarked1(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
 
-                            if (activity === 'soil') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setSoilExpand(!soilExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Soiling</Text>
+                        if (activity === 'soil') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setSoilExpand(!soilExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked2 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked2 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked2 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Soiling</Text>
+                                        </View>
 
-                                            {!soilExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {soilExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-                                        </TouchableOpacity>
+                                        {!soilExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {soilExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.soiling.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.soiling.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
+                                    </TouchableOpacity>
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked2 == 2 ? 'checked' : ''} onPress={() => setMarked2(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked2 == 3 ? 'checked' : ''} onPress={() => setMarked2(3)}></RadioButton.Item>
-                                                    </View>
+                                    {soilExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.soiling.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.soiling.step}</Text>
+
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked2 == 2 ? 'checked' : ''} onPress={() => setMarked2(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked2 == 3 ? 'checked' : ''} onPress={() => setMarked2(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
 
-                            if (activity === 'prune') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setPruneExpand(!pruneExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Pruning</Text>
+                        if (activity === 'prune') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setPruneExpand(!pruneExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked3 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked3 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Pruning</Text>
+                                        </View>
 
-                                            {!pruneExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {pruneExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-                                        </TouchableOpacity>
+                                        {!pruneExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {pruneExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.pruning.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.pruning.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
+                                    </TouchableOpacity>
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked3 == 2 ? 'checked' : ''} onPress={() => setMarked3(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked3 == 3 ? 'checked' : ''} onPress={() => setMarked3(3)}></RadioButton.Item>
-                                                    </View>
+                                    {pruneExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.pruning.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.pruning.step}</Text>
+
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked3 == 2 ? 'checked' : ''} onPress={() => setMarked3(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked3 == 3 ? 'checked' : ''} onPress={() => setMarked3(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
 
-                            if (activity === 'irrigate') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setIrrigateExpand(!irrigateExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Irrigation</Text>
+                        if (activity === 'irrigate') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setIrrigateExpand(!irrigateExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked4 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked4 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked4 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Irrigation</Text>
+                                        </View>
 
-                                            {!irrigateExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {irrigateExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-                                        </TouchableOpacity>
+                                        {!irrigateExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {irrigateExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.irrigation.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginTop:15 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.irrigation.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
+                                    </TouchableOpacity>
+
+                                    {irrigateExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.irrigation.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginTop: 15 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.irrigation.step}</Text>
 
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked4 == 2 ? 'checked' : ''} onPress={() => setMarked4(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked4 == 3 ? 'checked' : ''} onPress={() => setMarked4(3)}></RadioButton.Item>
-                                                    </View>
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked4 == 2 ? 'checked' : ''} onPress={() => setMarked4(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked4 == 3 ? 'checked' : ''} onPress={() => setMarked4(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
 
-                            if (activity === 'fertilize') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setFertilieExpand(!fertilieExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Fertiliation</Text>
+                        if (activity === 'fertilize') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setFertilieExpand(!fertilieExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked5 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked5 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked5 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Fertiliation</Text>
+                                        </View>
 
-                                            {!fertilieExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {fertilieExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-                                        </TouchableOpacity>
+                                        {!fertilieExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {fertilieExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.fertilization.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginVertical:15 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.fertilization.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
+                                    </TouchableOpacity>
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked5 == 2 ? 'checked' : ''} onPress={() => setMarked5(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked5 == 3 ? 'checked' : ''} onPress={() => setMarked5(3)}></RadioButton.Item>
-                                                    </View>
+                                    {fertilieExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.fertilization.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginVertical: 15 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 16, fontSize: 15, textAlign: 'justify' }}>{props.Actions.fertilization.step}</Text>
+
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked5 == 2 ? 'checked' : ''} onPress={() => setMarked5(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked5 == 3 ? 'checked' : ''} onPress={() => setMarked5(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
 
-                            if (activity === 'harvest') {
-                                return (
-                                    <View key={index}>
-                                        <TouchableOpacity onPress={() => setHarvestExpand(!harvestExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
-                                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-                                                <View style={{ height: 15, width: 15, borderStyle: 'solid', borderWidth: 2, borderColor: 'white', marginLeft: 15 }}></View>
-                                                <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Harvesting</Text>
+                        if (activity === 'harvest') {
+                            return (
+                                <View key={index}>
+                                    <TouchableOpacity onPress={() => setHarvestExpand(!harvestExpand)} style={{ backgroundColor: '#005F41', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 6, marginTop: 5 }}>
+                                        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                                            <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
+                                                {!marked6 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked6 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
+                                                {marked6 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                             </View>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Harvesting</Text>
+                                        </View>
 
-                                            {!harvestExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
-                                            )}
-
-                                            {harvestExpand && (
-                                                <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
-                                            )}
-                                        </TouchableOpacity>
+                                        {!harvestExpand && (
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
+                                        )}
 
                                         {harvestExpand && (
-                                            <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.harvesting.description}</Text>
-                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginTop:15 }}>Steps</Text>
-                                                <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.harvesting.step}</Text>
+                                            <Image style={styles.options} source={require('../../../../../Assets/Icons/Expand_W.png')} />
+                                        )}
+                                    </TouchableOpacity>
 
-                                                <View style={{ marginTop: 10 }}>
-                                                    <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
-                                                    <View style={{ marginRight: '50%' }}>
-                                                        <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked6 == 2 ? 'checked' : ''} onPress={() => setMarked6(2)}></RadioButton.Item>
-                                                        <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked6 == 3 ? 'checked' : ''} onPress={() => setMarked6(3)}></RadioButton.Item>
-                                                    </View>
+                                    {harvestExpand && (
+                                        <View style={{ marginVertical: 8, marginHorizontal: 5 }}>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Description</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.harvesting.description}</Text>
+                                            <Text style={{ color: 'black', fontSize: 16, fontWeight: 800, marginTop: 15 }}>Steps</Text>
+                                            <Text style={{ color: 'grey', fontSize: 15, textAlign: 'justify' }}>{props.Actions.harvesting.step}</Text>
+
+                                            <View style={{ marginTop: 10 }}>
+                                                <Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Status</Text>
+                                                <View style={{ marginRight: '50%' }}>
+                                                    <RadioButton.Item label="Completed" labelPosition="right" style={{ paddingVertical: 0 }} status={marked6 == 2 ? 'checked' : ''} onPress={() => setMarked6(2)}></RadioButton.Item>
+                                                    <RadioButton.Item label="Ignore" labelPosition="right" style={{ paddingVertical: 0 }} status={marked6 == 3 ? 'checked' : ''} onPress={() => setMarked6(3)}></RadioButton.Item>
                                                 </View>
                                             </View>
-                                        )}
-                                    </View>
-                                )
-                            }
-                        })}
-                    </ScrollView>
-                )}
+                                        </View>
+                                    )}
+                                </View>
+                            )
+                        }
+                    })}
+                </ScrollView>
+            )}
         </View>
     )
 }

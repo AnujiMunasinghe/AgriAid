@@ -11,39 +11,39 @@ import {
 import HomeHeader from '../../components/headers/HomeHeader';
 import Receivers from '../../components/messages/Receivers';
 
-const CropAdvisory =()=> {
+const CropAdvisory = () => {
 
   const [clientID, setClientID] = useState(null);
   const [allMessages, setAllMessages] = useState([])
   const [showChat, setShowChat] = useState(false)
   const [chatExpand, setChatEpand] = useState(false)
-  
 
-  const show_Chatting =async(index)=> {
+
+  const show_Chatting = async (index) => {
 
     try {
       setChatEpand(!chatExpand)
     }
-    
-    catch (err){
+
+    catch (err) {
       console.log(err)
     }
 
     setAllMessages(current => {
       const remake = [...current]
-      remake[index] = {...remake[index], chat:chatExpand}
+      remake[index] = { ...remake[index], chat: chatExpand }
       return remake
     })
   }
 
-    
+
   useEffect(() => {
 
     const app_user = new AppUser
 
-    socket.emit("previous", {role:1, need: app_user.fetch().id})
+    socket.emit("previous", { role: 1, need: app_user.fetch().id })
 
-    socket.on("inbox", (allMSGS)=> {
+    socket.on("inbox", (allMSGS) => {
       if (allMSGS != 0) {
         setAllMessages(allMSGS)
         setShowChat(true)
@@ -55,47 +55,47 @@ const CropAdvisory =()=> {
       setClientID(clientID);
     });
 
-    
+
     socket.on('chat', (message) => {
       console.log(`Received message: ${message}`);
-      
+
       if (message.a_ID === clientID) {
         console.log('Ok All done')
         // setMessages((prevMessages) => [...prevMessages, message]);
       }
     });
 
-   
+
     socket.on('connect', () => {
-      socket.emit('identify', app_user.fetch().id); 
+      socket.emit('identify', app_user.fetch().id);
     });
 
   }, []);
 
-    return (
-        <View>
-            <HomeHeader Title='Crop Advisory'></HomeHeader>
-         
-            {showChat && (
-              <ScrollView>
-                 {allMessages.map((sender, index) => (
-                    <Receivers 
-                        Sender={sender.name} 
-                        Id={sender.id} 
-                        Data={sender.data} 
-                        press_Action={()=>show_Chatting(index)}
-                        OpenChat={sender.chat}
-                        Role='Advisior'>
-                    </Receivers>
-                 ))}      
-              </ScrollView>
-            )}
-        </View>
-    )
+  return (
+    <View>
+      <HomeHeader Title='Crop Advisory'></HomeHeader>
+
+      {showChat && (
+        <ScrollView>
+          {allMessages.map((sender, index) => (
+            <Receivers
+              Sender={sender.name}
+              Id={sender.id}
+              Data={sender.data}
+              press_Action={() => show_Chatting(index)}
+              OpenChat={sender.chat}
+              Role='Advisior'>
+            </Receivers>
+          ))}
+        </ScrollView>
+      )}
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    
+
 })
 
 export default CropAdvisory;

@@ -7,7 +7,8 @@ import {
     Text,
     useWindowDimensions,
     View,
-    Image
+    Image,
+    Alert
 } from 'react-native';
 import SelectionDropdown from '../../../components/inputs/SelectionDropdown';
 import PositiveButton from '../../../components/buttons/PositiveButton';
@@ -32,6 +33,10 @@ const CropPopup = (props) => {
     const [period, setPeriod] = useState()
 
     const first_Done = async () => {
+        if (!selected) {
+            Alert.alert('Error', 'Please fill in all required fields')
+            return
+        }
         const request = new Request
 
         try {
@@ -61,12 +66,12 @@ const CropPopup = (props) => {
         const request = new Request
 
         const grow = new Date()
-        const harvest = new Date(grow.getTime() + (period * 24 * 60 * 60 * 1000))
+        const harvest = new Date(selectedDate.getTime() + (period * 24 * 60 * 60 * 1000))
 
         const cultivate = {
             farmer: props.Farmer,
             crop: selected,
-            begin: grow,
+            begin: selectedDate,
             end: harvest,
         }
 
@@ -147,45 +152,38 @@ const CropPopup = (props) => {
                             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><Text style={{ color: 'black', fontSize: 16, fontWeight: 800 }}>Crop Requirements</Text></View>
 
                             <View style={{ marginLeft: 20, marginTop: 5 }}>
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Irrigation:</Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15 }}>{selectedData.requirements.Irrigation}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Irrigation:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15 }}>{selectedData.requirements.Irrigation}</Text>
                                 </View>
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold' }}>Fertilizer: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15 }}>{selectedData.requirements.Fertilizer}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Fertilizer:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15 }}>{selectedData.requirements.Fertilizer}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Pest Threats: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15 }}>{selectedData.requirements.Pest_Threats}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Pest Threats:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15 }}>{selectedData.requirements.Pest_Threats}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Diseases: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15, width:230}}>{selectedData.requirements.Diseases}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Diseases:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15, flexWrap: 'wrap', width: 230 }}>{selectedData.requirements.Diseases}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Cultivation Districts: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15, width:180}}>{selectedData.requirements.Ideal_Cultivation_Locations}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Cultivation Districts:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15, flexWrap: 'wrap', width: 230 }}>{selectedData.requirements.Ideal_Cultivation_Locations}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Cultivation Time: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15, width:230}}>{selectedData.requirements.Ideal_Cultivation_Time}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Cultivation Time:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15, flexWrap: 'wrap', width: 230 }}>{selectedData.requirements.Ideal_Cultivation_Time}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Maturity Period: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15, width:230}}>{selectedData.requirements.Maturity_Period}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Maturity Period:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15, flexWrap: 'wrap', width: 230 }}>{selectedData.requirements.Maturity_Period}</Text>
                                 </View>
-
-                                <View style={{ flexDirection: 'row', }}>
-                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold'}}>Average Yield: </Text>
-                                    <Text style={{ color: 'grey', marginLeft: 5, fontSize: 15, width:200}}>{selectedData.requirements.Average_Yield}</Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Text style={{ color: 'black', fontSize: 15, fontWeight: 'bold', width: 150 }}>Average Yield:</Text>
+                                    <Text style={{ color: 'grey', fontSize: 15, flexWrap: 'wrap', width: 230 }}>{selectedData.requirements.Average_Yield}</Text>
                                 </View>
-                            
                             </View>
 
                             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginVertical: 40 }}>

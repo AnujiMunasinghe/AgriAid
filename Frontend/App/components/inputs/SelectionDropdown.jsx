@@ -2,7 +2,28 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 
-const SelectionDropdown = ({ Label, List, Selected, Placeholder }) => {
+const SelectionDropdown = ({ Label, List, Selected, Placeholder, expand }) => {
+  if (expand) {
+    return (
+      <>
+        <View style={styles.container}>
+          <Text style={styles.label}>{Label}</Text>
+          <View style={styles.selectBoxContainer}>
+            <SelectList
+              data={List}
+              setSelected={Selected}
+              // boxStyles={styles.selectBox}
+              // inputStyles={styles.selectBoxInput}
+              // dropdownStyles={styles.dropdown}
+              // dropdownTextStyles={styles.dropdownText}
+              placeholder={Placeholder}
+              search={false}
+            />
+          </View>
+        </View>
+      </>
+    )
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{Label}</Text>

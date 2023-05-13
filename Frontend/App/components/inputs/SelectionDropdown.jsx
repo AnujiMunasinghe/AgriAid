@@ -1,62 +1,73 @@
-
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
-import { Picker } from '@react-native-picker/picker';
 
-const SelectionDropdown = (props) => {
-
-    const [selectedValue, setSelectedValue] = useState("");
-
-
-
-    return (
-
-        <View style={styles.formField}>
-            <Text style={styles.label}>{props.Label}</Text>
-
-            <View style={{ position: 'relative', zIndex: 3, marginTop: 5 }}>
-                <SelectList
-                    data={props.List}
-                    setSelected={props.Selected}
-                    boxStyles={{ backgroundColor: 'white', alignItems: 'center', paddingVertical: 7, borderRadius: 8, width: 200 }}
-                    inputStyles={{ fontSize: 15, color: 'grey' }}
-                    dropdownStyles={{ backgroundColor: 'white', position: 'absolute', zIndex: 999, width: '100%', top: 30, height: 'auto', overflow: 'scroll' }}
-                    dropdownTextStyles={{ color: '#4A4747', fontSize: 14, marginTop: 5 }}
-                    placeholder={props.Placeholder}
-                    search={false}
-                >
-                </SelectList>
-
-                {/* <View>
-                    <Picker
-                        selectedValue={selectedValue}
-                        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-                    >
-
-                        <Picker.Item label="Option 1" value="Option 1" />
-                        <Picker.Item label="Option 2" value="Option 2" />
-                        <Picker.Item label="Option 3" value="Option 3" />
-                    </Picker>
-                </View> */}
-
-            </View>
-        </View>
-    )
-}
+const SelectionDropdown = ({ Label, List, Selected, Placeholder }) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.label}>{Label}</Text>
+      <View style={styles.selectBoxContainer}>
+        <SelectList
+          data={List}
+          setSelected={Selected}
+          boxStyles={styles.selectBox}
+          inputStyles={styles.selectBoxInput}
+          dropdownStyles={styles.dropdown}
+          dropdownTextStyles={styles.dropdownText}
+          placeholder={Placeholder}
+          search={false}
+        />
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-    formField: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-
-    label: {
-        color: 'black',
-        fontSize: 16,
-        marginTop: 2,
-    },
-})
+  container: {
+    marginBottom: 10,
+  },
+  label: {
+    fontSize: 16,
+    color: 'black',
+    marginBottom: 5,
+  },
+  selectBoxContainer: {
+    position: 'relative',
+    zIndex: 9999,
+  },
+  selectBox: {
+    backgroundColor: 'white',
+    alignItems: 'center',
+    paddingVertical: 7,
+    borderRadius: 8,
+    width: '100%',
+    borderWidth: 1,
+    borderColor: 'grey',
+  },
+  selectBoxInput: {
+    fontSize: 15,
+    color: 'grey',
+    width: '100%',
+  },
+  dropdown: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    zIndex: 9999,
+    top: '100%',
+    width: '100%',
+    maxHeight: 150,
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  dropdownText: {
+    color: '#4A4747',
+    fontSize: 14,
+    marginTop: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 7,
+  },
+});
 
 export default SelectionDropdown;

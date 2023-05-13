@@ -7,7 +7,8 @@ import {
     Text,
     useWindowDimensions,
     View,
-    Image
+    Image,
+    Alert
 } from 'react-native';
 import SelectionDropdown from '../../../components/inputs/SelectionDropdown';
 import PositiveButton from '../../../components/buttons/PositiveButton';
@@ -32,6 +33,10 @@ const CropPopup = (props) => {
     const [period, setPeriod] = useState()
 
     const first_Done = async () => {
+        if (!selected) {
+            Alert.alert('Error', 'Please fill in all required fields')
+            return
+        }
         const request = new Request
 
         try {

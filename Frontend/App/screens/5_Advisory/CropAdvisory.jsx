@@ -44,6 +44,7 @@ const CropAdvisory = () => {
     socket.emit("previous", { role: 1, need: app_user.fetch().id })
 
     socket.on("inbox", (allMSGS) => {
+      console.log(allMSGS);
       if (allMSGS != 0) {
         setAllMessages(allMSGS)
         setShowChat(true)

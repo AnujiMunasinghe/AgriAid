@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import io from 'socket.io-client';
-const socket = io.connect("http://192.168.8.182:3001")
+const socket = io.connect("http://192.168.1.4:3001")
 import AppUser from '../../StaticData/AppUser';
 
 import {

@@ -141,8 +141,8 @@ const ProfMgmt = () => {
 
             <DoubleTab
                 Mark={left}
-                LeftButton="Agricultural Professional Requests"
-                RightButton="Agricultural Professionals"
+                LeftButton="Pending Requests"
+                RightButton="Approve Requests"
                 press_LeftAction={active_Left}
                 press_RightAction={active_Right}>
             </DoubleTab>

@@ -13,15 +13,29 @@ const MgmtHome = ({ navigation }) => {
         <View>
             <HomeHeader Title="User Management"></HomeHeader>
             <View style={styles.button}>
-                <SquareButton Title_1="Farmers" press_Action={() => navigation.navigate('FarmerMgmt')}></SquareButton>
+                <SquareButton
+                    Title_1="Farmers"
+                    Title_2="Management"
+                    press_Action={() => navigation.navigate('FarmerMgmt')}>
+                </SquareButton>
                 <SquareButton
                     Title_1="Agricultural"
-                    Title_2="Professional"
+                    Title_2="Management"
                     press_Action={() => navigation.navigate('ProfMgmt')}>
                 </SquareButton>
             </View>
             <View style={styles.button}>
-                <SquareButton Title_1="Admin Registration" press_Action={() => navigation.navigate('FarmerRegister', 2)}></SquareButton> 
+                <SquareButton
+                    Title_1="Admin"
+                    Title_2="Management"
+                    press_Action={() => navigation.navigate('FarmerRegister', 2)}>
+                </SquareButton>
+                <SquareButton
+                    invincible={true}
+                    Title_1="Admin Registration"
+                    press_Action={() => navigation.navigate('FarmerRegister', 2)}
+                >
+                </SquareButton>
             </View>
         </View>
     )

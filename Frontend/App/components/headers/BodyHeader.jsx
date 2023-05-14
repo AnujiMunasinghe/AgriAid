@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
     StyleSheet,
@@ -13,13 +13,13 @@ import BackButton from '../buttons/BackButton';
 import AccountPopup from '../popups/AccountPopup';
 
 
-const BodyHeader =( props )=> {
+const BodyHeader = (props) => {
 
-    const[accountPopup, setAccountPopup] = useState(false)
+    const [accountPopup, setAccountPopup] = useState(false)
 
     useEffect(() => {
         const handleBackButton = () => {
-            if(accountPopup) {
+            if (accountPopup) {
                 setAccountPopup(false)
                 return true;
             }
@@ -28,63 +28,63 @@ const BodyHeader =( props )=> {
                 return false;
             }
         };
-        
+
         BackHandler.addEventListener('hardwareBackPress', handleBackButton);
-        
+
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButton);
         };
     }, [accountPopup]);
-    
+
     return (
         <View style={styles.body}>
 
-            <View style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <BackButton></BackButton>
                 <View style={styles.brand}>
-                    <Text style={styles.text}>{ props.Title }</Text>
+                    <Text style={styles.text}>{props.Title}</Text>
                 </View>
             </View>
 
             <View style={styles.account}>
-                <AccountButton press_Action={()=>setAccountPopup(true)}></AccountButton>
+                <AccountButton press_Action={() => setAccountPopup(true)}></AccountButton>
             </View>
 
-            {accountPopup && (<AccountPopup logout_User={props.logout_Action}/>)}
+            {accountPopup && (<AccountPopup logout_User={props.logout_Action} />)}
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    body : {
+    body: {
         flexDirection: 'row',
-      backgroundColor : '#005F41',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      zIndex:1
+        backgroundColor: '#005F41',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        zIndex: 1
     },
 
-    text : {
-      marginVertical:9,
-      color: 'white',
-      fontSize: 23,
-      fontWeight: 600,
+    text: {
+        marginVertical: 9,
+        color: 'white',
+        fontSize: 23,
+        fontWeight: 600,
     },
 
     logo: {
         height: 40,
-        width:40,
-        marginRight:6
+        width: 40,
+        marginRight: 6
     },
-    
-    brand : {
+
+    brand: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginLeft:10
+        marginLeft: 10
     },
 
     account: {
-        marginRight:15
+        marginRight: 15
     },
 })
 

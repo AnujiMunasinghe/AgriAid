@@ -18,7 +18,7 @@ router.route('/register').post(async (req, res) => {
         }
 
         const idPrefix = role.toUpperCase(); // Prefix the role in uppercase
-        const idSuffix = uuidv4().split("-").join("").substring(0, 6); // Generate a unique ID
+        const idSuffix = uuidv4().split("-").join("").substring(0, 3); // Generate a unique ID
         const id = `${idPrefix}_${idSuffix}`; // Combine the prefix and suffix to form the ID
 
         const newUser = new dataModel({

@@ -12,10 +12,10 @@ class AppUser {
 
     fetch() {
         const user = {
-                        id: _id,
-                        name: _name,
-                        email: _email
-                     }
+            id: _id,
+            name: _name,
+            email: _email
+        }
         return user
     }
 }

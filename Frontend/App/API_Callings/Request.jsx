@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 
 class Request extends Component {
-    mainServer = 'http://192.168.1.2'
+    mainServer = 'http://192.168.1.4'
 
     serverURL = this.mainServer + ':8000'
     aiURL = this.mainServer + ':5000'

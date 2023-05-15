@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
-    StyleSheet,
-    TouchableOpacity,
+    Alert,
     Image,
-    TextInput,
     ScrollView,
-    View,
+    StyleSheet,
     Text,
-    Alert
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
 
-import BodyHeader from '../../../../components/headers/BodyHeader';
-import SelectedCrop from '../../../../StaticData/SelectedCrop';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
 import Request from '../../../../API_Callings/Request';
 import AppUser from '../../../../StaticData/AppUser';
-import RNDateTimePicker from '@react-native-community/datetimepicker';
-import PositiveButton from '../../../../components/buttons/PositiveButton';
+import SelectedCrop from '../../../../StaticData/SelectedCrop';
 import NegativeButton from '../../../../components/buttons/NegativeButton';
+import PositiveButton from '../../../../components/buttons/PositiveButton';
+import BodyHeader from '../../../../components/headers/BodyHeader';
+import SelectionDropdown from '../../../../components/inputs/SelectionDropdown';
 
 const HarvestRecord = () => {
 
@@ -28,7 +29,7 @@ const HarvestRecord = () => {
     const [calender, setCalender] = useState(false)
 
     const [quantity, setQuantity] = useState(0)
-    const [quality, setQuality] = useState(0)
+    const [quality, setQuality] = useState('')
     const [harvested, setHarvested] = useState('Pick a date')
 
     const [fieldState, setFieldState] = useState(true)
@@ -90,8 +91,8 @@ const HarvestRecord = () => {
             Alert.alert("Error", "Please enter a valid quantity.");
             return;
         }
-        if (quality <= 0 || isNaN(quality)) {
-            Alert.alert("Error", "Please enter a valid quality.");
+        if (!quality) {
+            Alert.alert("Error", "Please select a harvested quality.");
             return;
         }
 
@@ -112,7 +113,11 @@ const HarvestRecord = () => {
             try {
                 const request = new Request
                 const response = await request.Record(record)
-                console.log(response.data)
+                console.log("success", response.data)
+
+                setQuantity(0)
+                setQuality('')
+                setHarvested('Pick a date')
             }
 
             catch (err) {
@@ -174,14 +179,20 @@ const HarvestRecord = () => {
                         </View>
 
                         <View style={{ marginTop: 18 }}>
-                            <TextInput
+                            {/* <TextInput
                                 editable={fieldState}
                                 style={styles.input}
                                 placeholder='Enter harvested quality'
                                 value={quality}
                                 placeholderTextColor={'grey'}
                                 onChangeText={(value) => setQuality(value)}>
-                            </TextInput>
+                            </TextInput> */}
+                            <SelectionDropdown
+                                List={["Grade A", "Grade B", "Grade C", "Grade D"]}
+                                Selected={(value) => setQuality(value)}
+                                expand={true}
+                                textInputStyle={true}
+                            />
                         </View>
                     </View>
                 </View>

@@ -133,6 +133,8 @@ const MyCrops = ({ navigation }) => {
 
                     <TouchableOpacity onPress={() => setPopup(true)}><View style={styles.button}><Text style={{ color: 'white' }}>+ Add Crop</Text></View></TouchableOpacity>
                 </View>
+
+                
             </View>
         </View>
     )

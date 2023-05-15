@@ -2,20 +2,24 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SelectList } from 'react-native-dropdown-select-list';
 
-const SelectionDropdown = ({ Label, List, Selected, Placeholder, expand }) => {
+const SelectionDropdown = ({ Label, List, Selected, Placeholder, expand, textInputStyle }) => {
   if (expand) {
     return (
       <>
         <View style={styles.container}>
           {Label && <Text style={styles.label}>{Label}</Text>}
-          <View style={styles.selectBoxContainer}>
+          <View style={textInputStyle ? {
+            position: 'relative',
+            zIndex: 9999,
+            paddingLeft: 10,
+          } : styles.selectBoxContainer}>
             <SelectList
               data={List}
               setSelected={Selected}
-              // boxStyles={styles.selectBox}
-              // inputStyles={styles.selectBoxInput}
-              // dropdownStyles={styles.dropdown}
-              // dropdownTextStyles={styles.dropdownText}
+              boxStyles={textInputStyle ? { backgroundColor: "white", color: "black", width: "61%", paddingLeft: 10, borderColor: "black", borderWidth: 2 } : {}}
+              inputStyles={textInputStyle ? { backgroundColor: "white", color: "black", } : {}}
+              dropdownStyles={textInputStyle ? { backgroundColor: "white", color: "black", width: "60%" } : {}}
+              dropdownTextStyles={textInputStyle ? { backgroundColor: "white", color: "black", width: "60%" } : {}}
               placeholder={Placeholder}
               search={false}
             />

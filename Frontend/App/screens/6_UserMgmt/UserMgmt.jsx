@@ -42,11 +42,6 @@ const styles = {
 
 const UserTable = (props) => {
 
-    // const data = [{ "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "F", "name": "Fg", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "001", "name": "Ann", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "1", "name": "Chamith Hirushan", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "001", "name": "user", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "55", "name": "gh", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "010", "name": "dave", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "009", "name": "fay", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "008", "name": "lia", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "55", "name": "gh", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "55", "name": "gh", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-14T13:29:35.705Z", "designation": "", "id": "F", "name": "Fg", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-09T10:10:23.477Z", "id": "FARMER_93bda2", "name": "test user 666", "updated_date": null }, { "__v": 0, "created_date": "2023-05-10T16:24:15.751Z", "id": "FARMER_14132e", "name": "farmer", "updated_date": null }, { "__v": 0, "created_date": "2023-05-10T16:31:37.523Z", "designation": "", "id": "FARMER_7a41e3", "name": "farmer1", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-10T17:00:17.543Z", "designation": "", "id": "FARMER_91034c", "name": "janith", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-10T17:07:24.668Z", "designation": "", "id": "FARMER_a68071", "name": "test97656", "updated_date": null, "workplace": "" }, {
-    //     "__v": 0, "created_date": "2023-05-10T17:22:57.976Z", "designation":
-    //         "", "id": "FARMER_4e7be6", "name": "test", "updated_date": null, "workplace": ""
-    // }, { "__v": 0, "created_date": "2023-05-10T17:24:20.436Z", "designation": "", "id": "FARMER_c19d6e", "name": "test", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-10T17:24:44.332Z", "designation": "", "id": "FARMER_41c045", "name": "test", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-10T17:27:01.584Z", "designation": "", "id": "FARMER_001f47", "name": "test", "updated_date": null, "workplace": "" }, { "__v": 0, "created_date": "2023-05-11T15:51:14.930Z", "designation": "", "id": "FARMER_eba86b", "name": "Jane Doee", "updated_date": null, "workplace": "" }]
-
     const [data, setData] = useState([])
     const { height } = useWindowDimensions();
     const [reload, setReload] = useState(0)
@@ -62,7 +57,12 @@ const UserTable = (props) => {
     const [page, setPage] = useState(0);
     const [pageSize, setPageSize] = useState(PAGE_SIZE);
 
-    const titles = [{ head: 'User ID', width: '30%' }, { head: 'Name', width: '20%' }, { head: 'Created Date', width: '30%' }, { head: 'Options', width: '12%' },];
+    const [titles, setTitles] = useState([])
+    // const titles = [
+    //     // { head: 'User ID', width: '30%' },
+    //     { head: 'Name', width: '40%' },
+    //     { head: 'Created Date', width: '40%' },
+    //     { head: 'Options', width: '15%' },];
 
     const get_Remove = (id) => {
         if (props.Type == 'Professional') {
@@ -160,6 +160,30 @@ const UserTable = (props) => {
         setUsers(data.slice(0, PAGE_SIZE))
     }, [data])
 
+    useEffect(() => {
+        console.log(props.Type);
+        if (props.Type == "Farmer") {
+            setTitles([{ head: 'User ID', width: '30%' }, { head: 'Name', width: '20%' }, { head: 'Created Date', width: '30%' }, { head: 'Options', width: '12%' },])
+            return
+        }
+        if (props.Type == "Professional") {
+            setTitles([
+                { head: 'Name', width: '20%' },
+                { head: 'Workplace', width: '20%' },
+                { head: 'Designation', width: '20%' },
+                { head: 'Created Date', width: '25%' },
+                { head: 'Options', width: '15%' }
+            ])
+            return
+        }
+        setTitles([
+            { head: 'Name', width: '40%' },
+            { head: 'Created Date', width: '40%' },
+            { head: 'Options', width: '15%' }
+        ])
+    }, [props.Type])
+
+
 
 
     return (
@@ -189,9 +213,21 @@ const UserTable = (props) => {
             <View>
                 {users.map((user, index) => (
                     <View style={styles.userRow} key={index}>
-                        <Text style={{ color: 'black', width: '32%' }}>{user.id}</Text>
-                        <Text style={{ color: 'black', width: '22%' }}>{user.name}</Text>
-                        <Text style={{ color: 'black', width: '32%' }}>{user.created_date.slice(0, 10)}</Text>
+                        {props.Type == "Professional" &&
+                            <>
+                                <Text style={{ color: 'black', width: '20%' }}>{user.name}</Text>
+                                <Text style={{ color: 'black', width: '20%' }}>{user.workplace}</Text>
+                                <Text style={{ color: 'black', width: '25%' }}>{user.designation}</Text>
+                                <Text style={{ color: 'black', width: '25%' }}>{user.created_date.slice(0, 10)}</Text>
+                            </>
+                        }
+                        {props.Type == "Farmer" &&
+                            <>
+                                <Text style={{ color: 'black', width: '32%' }}>{user.id}</Text>
+                                <Text style={{ color: 'black', width: '22%' }}>{user.name}</Text>
+                                <Text style={{ color: 'black', width: '32%' }}>{user.created_date.slice(0, 10)}</Text>
+                            </>
+                        }
                         <TouchableOpacity onPress={() => get_Remove(user.id)}>
                             <Image style={styles.options} source={require('../../Assets/Icons/Delete.png')} />
                         </TouchableOpacity>

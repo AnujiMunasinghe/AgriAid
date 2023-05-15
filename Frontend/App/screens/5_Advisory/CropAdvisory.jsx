@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AppUser from '../../StaticData/AppUser';
 import io from 'socket.io-client';
-const socket = io.connect("http://192.168.8.182:3001")
+const socket = io.connect("http://192.168.1.4:3001")
 
 import {
   StyleSheet,
@@ -44,6 +44,7 @@ const CropAdvisory = () => {
     socket.emit("previous", { role: 1, need: app_user.fetch().id })
 
     socket.on("inbox", (allMSGS) => {
+      console.log(allMSGS);
       if (allMSGS != 0) {
         setAllMessages(allMSGS)
         setShowChat(true)

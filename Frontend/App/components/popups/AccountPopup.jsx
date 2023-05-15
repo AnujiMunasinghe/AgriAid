@@ -15,31 +15,31 @@ import AppUser from '../../StaticData/AppUser';
 import { useNavigation } from '@react-navigation/native';
 
 
-const AccountPopup =( props )=> {
+const AccountPopup = (props) => {
 
     const { height } = useWindowDimensions();
-    const[clickedLogout, setClickedLogout] = useState(false)
+    const [clickedLogout, setClickedLogout] = useState(false)
 
-    const[data, setData] = useState({id:'', name:'', email:''})
+    const [data, setData] = useState({ id: '', name: '', email: '' })
 
     const navigation = useNavigation();
 
-    const get_LoggingOut =()=> {
+    const get_LoggingOut = () => {
         navigation.navigate('ChooseRole');
     }
 
     useEffect(() => {
-       const user = new AppUser
-       setData(user.fetch())
+        const user = new AppUser
+        setData(user.fetch())
     }, []);
 
     return (
-        <View style={[styles.popup, {height}]}>
-            { !clickedLogout &&
+        <View style={[styles.popup, { height }]}>
+            {!clickedLogout &&
                 <View style={styles.accountBox}>
                     <View style={styles.align}>
                         <View style={styles.details}>
-                            <Image style={styles.accountLogo} source={require('../../Assets/Icons/Account.png')}/>
+                            <Image style={styles.accountLogo} source={require('../../Assets/Icons/Account.png')} />
                             <View>
                                 <Text style={styles.name}>{data.id}: {data.name}</Text>
                                 <Text style={styles.email}>{data.email}</Text>
@@ -47,29 +47,29 @@ const AccountPopup =( props )=> {
                         </View>
 
                         <View style={styles.button}>
-                            <PositiveButton Title='Log Out' press_Action={()=> setClickedLogout(true)}></PositiveButton>
+                            <PositiveButton Title='Log Out' press_Action={() => setClickedLogout(true)}></PositiveButton>
                         </View>
                     </View>
-                </View> 
+                </View>
             }
 
-            { clickedLogout &&
+            {clickedLogout &&
                 <View style={styles.logoutBox}>
                     <View style={styles.logoutHeader}>
                         <Text style={styles.logoutText}>Log Out</Text>
-                        <CloseButton press_Action={()=> setClickedLogout(false)}></CloseButton>
+                        <CloseButton press_Action={() => setClickedLogout(false)}></CloseButton>
                     </View>
 
                     <View style={styles.logoutContents}>
                         <Text style={styles.logoutTitle}>Are you sure, you want to Log Out?</Text>
 
                         <View style={styles.chooseButtons}>
-                            <View style={{ flex: 1, paddingRight:3 }}>
+                            <View style={{ flex: 1, paddingRight: 3 }}>
                                 <PositiveButton Title='Log Out' press_Action={get_LoggingOut}></PositiveButton>
                             </View>
 
-                            <View style={{ flex: 1, paddingLeft:3 }}>
-                                <NegativeButton Title='Cancel' press_Action={()=> setClickedLogout(false)}></NegativeButton>
+                            <View style={{ flex: 1, paddingLeft: 3 }}>
+                                <NegativeButton Title='Cancel' press_Action={() => setClickedLogout(false)}></NegativeButton>
                             </View>
                         </View>
                     </View>
@@ -81,70 +81,70 @@ const AccountPopup =( props )=> {
 
 const styles = StyleSheet.create({
     popup: {
-        top:0,
-        position:'absolute',
-        width:'100%',
-        backgroundColor:'rgba(0, 0, 0, 0.8)',
-        zIndex:2,
+        top: 0,
+        position: 'absolute',
+        width: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        zIndex: 2,
     },
 
     accountBox: {
-        position:'absolute',
-        top:'6.3%',
-        right:'5%',
-        height:218,
-        width:177,
-        backgroundColor:'white',
-        borderRadius:9,
-        justifyContent:'center',
+        position: 'absolute',
+        top: '6.3%',
+        right: '5%',
+        height: 150,
+        width: 225,
+        backgroundColor: 'white',
+        borderRadius: 9,
+        justifyContent: 'center',
     },
 
     align: {
-        height:'75%',
-        justifyContent:'space-between'
+        height: '80%',
+        justifyContent: 'space-between'
     },
 
     details: {
-        flexDirection:'row',
-        alignItems:'center',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
 
     accountLogo: {
-        height:30,
-        width:30,
-        marginRight:6,
-        marginLeft:10
+        height: 30,
+        width: 30,
+        marginRight: 15,
+        marginLeft: 10
     },
 
-    name : {
+    name: {
         color: 'black',
         fontSize: 14,
         fontWeight: 700
     },
 
     email: {
-        color:'#989595',
-        fontSize:11
+        color: '#989595',
+        fontSize: 11
     },
 
     button: {
-        paddingHorizontal:10,
+        paddingHorizontal: 10,
         marginBottom: 15
     },
 
     logoutBox: {
-        top:150,
-        marginHorizontal:40,
-        aspectRatio:1.4,
-        backgroundColor:'white',
-        borderRadius:9
+        top: 150,
+        marginHorizontal: 40,
+        aspectRatio: 1.4,
+        backgroundColor: 'white',
+        borderRadius: 9
     },
 
     logoutContents: {
-        marginTop:35,
-        height:90,
-        alignItems:'center', 
-        justifyContent:'space-between',
+        marginTop: 35,
+        height: 90,
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
 
     logoutTitle: {
@@ -155,24 +155,24 @@ const styles = StyleSheet.create({
 
     chooseButtons: {
         flexDirection: 'row',
-        width:'75%'
+        width: '75%'
     },
 
     logoutHeader: {
-        flexDirection:'row',
-        justifyContent:'space-between',
-        borderStyle:'solid',
-        borderBottomWidth:1,
-        alignItems:'center',
-        height:33,
-        paddingHorizontal:7
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderStyle: 'solid',
+        borderBottomWidth: 1,
+        alignItems: 'center',
+        height: 33,
+        paddingHorizontal: 7
     },
 
     logoutText: {
         color: 'black',
-        fontSize:16,
-        fontWeight:700,
-        marginLeft:7
+        fontSize: 16,
+        fontWeight: 700,
+        marginLeft: 7
     },
 
 })

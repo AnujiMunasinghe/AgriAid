@@ -1,30 +1,68 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View, useWindowDimensions } from 'react-native';
 import Request from '../../API_Callings/Request';
 import ActionPopup from '../../components/popups/ActionPopup';
 
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TouchableOpacity,
-    useWindowDimensions,
-} from 'react-native';
 
-const UserMgmt = (props) => {
+const PAGE_SIZE = 10; // Number of items to be shown per page
 
+const styles = {
+    container: {
+        position: 'relative',
+    },
+    actionPopup: {
+        height: 200,
+    },
+    titleRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 20,
+    },
+    titleCell: {
+        backgroundColor: '#005F41',
+        marginHorizontal: 3,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    text: {
+        color: 'white',
+    },
+    userRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginHorizontal: 5,
+        marginVertical: 6,
+    },
+    options: {
+        width: 24,
+        height: 24,
+    },
+};
+
+const UserTable = (props) => {
+
+    const [data, setData] = useState([])
     const { height } = useWindowDimensions();
     const [reload, setReload] = useState(0)
 
-    const [users, setUsers] = useState([])
-    const [showPopup, setShowPopup] = useState(false)
-
+    const [showPopup, setShowPopup] = useState(false);
     const [manage, setManage] = useState({
         id: '',
         title: '',
         description: '',
         positive: ''
-    })
+    });
+    const [users, setUsers] = useState([]);
+    const [page, setPage] = useState(0);
+    const [pageSize, setPageSize] = useState(PAGE_SIZE);
+
+    const [titles, setTitles] = useState([])
+    // const titles = [
+    //     // { head: 'User ID', width: '30%' },
+    //     { head: 'Name', width: '40%' },
+    //     { head: 'Created Date', width: '40%' },
+    //     { head: 'Options', width: '15%' },];
 
     const get_Remove = (id) => {
         if (props.Type == 'Professional') {
@@ -68,6 +106,14 @@ const UserMgmt = (props) => {
         }
     }
 
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+        setUsers(data.slice(newPage * pageSize, (newPage + 1) * pageSize));
+    };
+
+    const totalPages = Math.ceil(data.length / pageSize);
+    const pages = Array.from(Array(totalPages).keys());
+
     useEffect(() => {
         const get_Requests = async () => {
             const user = { type: props.Type, status: 'show' }
@@ -76,7 +122,7 @@ const UserMgmt = (props) => {
 
             try {
                 const response = await request.FetchUsers(user)
-                setUsers(response.data)
+                setData(response.data)
             }
 
             catch (err) {
@@ -96,7 +142,7 @@ const UserMgmt = (props) => {
 
             try {
                 const response = await request.FetchUsers(user)
-                setUsers(response.data)
+                setData(response.data)
             }
 
             catch (err) {
@@ -109,14 +155,39 @@ const UserMgmt = (props) => {
 
     }, [reload]);
 
-    const titles = [
-        { head: 'ID', width: '15%' },
-        { head: 'Name', width: '40%' },
-        { head: 'Registration Date', width: '30%' },
-    ]
+    useEffect(() => {
+        if (!data) return
+        setUsers(data.slice(0, PAGE_SIZE))
+    }, [data])
+
+    useEffect(() => {
+        console.log(props.Type);
+        if (props.Type == "Farmer") {
+            setTitles([{ head: 'User ID', width: '30%' }, { head: 'Name', width: '20%' }, { head: 'Created Date', width: '30%' }, { head: 'Options', width: '12%' },])
+            return
+        }
+        if (props.Type == "Professional") {
+            setTitles([
+                { head: 'Name', width: '20%' },
+                { head: 'Workplace', width: '20%' },
+                { head: 'Designation', width: '20%' },
+                { head: 'Created Date', width: '25%' },
+                { head: 'Options', width: '15%' }
+            ])
+            return
+        }
+        setTitles([
+            { head: 'Name', width: '40%' },
+            { head: 'Created Date', width: '40%' },
+            { head: 'Options', width: '15%' }
+        ])
+    }, [props.Type])
+
+
+
 
     return (
-        <View style={{ position: 'relative' }}>
+        <View style={styles.container}>
             {showPopup && (
                 <View style={[styles.actionPopup, { height }]}>
                     <ActionPopup
@@ -124,60 +195,56 @@ const UserMgmt = (props) => {
                         Description={manage.description}
                         Positive='Remove'
                         Close={() => setShowPopup(false)}
-                        get_Action={confirm_Action}>
-                    </ActionPopup>
+                        get_Action={confirm_Action}
+                    />
                 </View>
             )}
 
-            {props.Type === 'Farmer' && (
-                <View style={{ marginTop: 20 }}></View>
-            )}
-
+            {props.Type === 'Farmer' && <View style={{ marginTop: 20 }} />}
 
             <View style={styles.titleRow}>
                 {titles.map((title, index) => (
-                    <View key={index} style={{ backgroundColor: '#005F41', width: title.width, marginHorizontal: 3, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.text}>{title.head}</Text></View>
+                    <View key={index} style={[styles.titleCell, { width: title.width }]}>
+                        <Text style={styles.text}>{title.head}</Text>
+                    </View>
                 ))}
             </View>
 
             <View>
                 {users.map((user, index) => (
-                    <View style={{ display: 'flex', flexDirection: 'row', marginHorizontal: 5, marginVertical: 6 }} key={index}>
-                        <Text style={{ color: 'black', width: '18%' }}>{user.id}</Text>
-                        <Text style={{ color: 'black', width: '42%' }}>{user.name}</Text>
-                        <Text style={{ color: 'black', width: '32%' }}>2012/12/20</Text>
-                        <TouchableOpacity onPress={() => get_Remove(user.id)}><Image style={styles.options} source={require('../../Assets/Icons/Delete.png')} /></TouchableOpacity>
+                    <View style={styles.userRow} key={index}>
+                        {props.Type == "Professional" &&
+                            <>
+                                <Text style={{ color: 'black', width: '20%' }}>{user.name}</Text>
+                                <Text style={{ color: 'black', width: '20%' }}>{user.workplace}</Text>
+                                <Text style={{ color: 'black', width: '25%' }}>{user.designation}</Text>
+                                <Text style={{ color: 'black', width: '25%' }}>{user.created_date.slice(0, 10)}</Text>
+                            </>
+                        }
+                        {props.Type == "Farmer" &&
+                            <>
+                                <Text style={{ color: 'black', width: '32%' }}>{user.id}</Text>
+                                <Text style={{ color: 'black', width: '22%' }}>{user.name}</Text>
+                                <Text style={{ color: 'black', width: '32%' }}>{user.created_date.slice(0, 10)}</Text>
+                            </>
+                        }
+                        <TouchableOpacity onPress={() => get_Remove(user.id)}>
+                            <Image style={styles.options} source={require('../../Assets/Icons/Delete.png')} />
+                        </TouchableOpacity>
                     </View>
                 ))}
             </View>
+
+            {/* Pagination */}
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginTop: 10 }}>
+                {pages.map((p) => (
+                    <TouchableOpacity key={p} onPress={() => handlePageChange(p)}>
+                        <Text style={{ color: page === p ? '#005F41' : '#000', marginHorizontal: 5 }}>{p + 1}</Text>
+                    </TouchableOpacity>
+                ))}
+            </View>
         </View>
-    )
-}
+    );
+};
 
-const styles = StyleSheet.create({
-    titleRow: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
-
-    actionPopup: {
-        position: 'absolute',
-        top: 0,
-        width: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        zIndex: 12
-    },
-
-    text: {
-        color: 'white',
-        marginHorizontal: 5,
-        marginVertical: 4
-    },
-
-    options: {
-        height: 17,
-        width: 17
-    }
-})
-
-export default UserMgmt;
+export default UserTable;

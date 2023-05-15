@@ -19,12 +19,14 @@ const ProfMgmt = () => {
     const { height } = useWindowDimensions();
 
     const [left, setLeft] = useState(true)
+    const [reload, setReload] = useState(false)
 
     const titles = [
-        { head: 'ID', width: '10%' },
-        { head: 'Name', width: '20%' },
+        // { head: 'ID', width: '30%' },
+        { head: 'Name', width: '30%' },
         { head: 'Workplace', width: '30%' },
-        { head: 'Designation', width: '23%' }
+        { head: 'Designation', width: '25%' },
+        { head: 'Options', width: '15%' },
     ]
 
     const [requests, setRequests] = useState([])
@@ -55,6 +57,9 @@ const ProfMgmt = () => {
     }
 
     const approve_Request = (id) => {
+        console.log("her", id);
+        setReload(false)
+
         const popup = {
             id: id,
             title: 'Approve Request',
@@ -67,6 +72,7 @@ const ProfMgmt = () => {
     }
 
     const reject_Request = (id) => {
+        setReload(false)
         const popup = {
             id: id,
             title: 'Reject Request',
@@ -85,6 +91,8 @@ const ProfMgmt = () => {
                 const request = new Request
                 const response = await request.ApproveRequest(data)
                 console.log(response.data)
+                setReload(true)
+                setConfirm(false)
             }
 
             catch (err) {
@@ -95,8 +103,10 @@ const ProfMgmt = () => {
         else if (action == 'Reject') {
             try {
                 const request = new Request
-                const response = await request.DeleteUser(manage.id)
+                const response = await request.DeleteUser({ id: manage.id })
                 console.log(response.data)
+                setReload(true)
+                setConfirm(false)
             }
 
             catch (err) {
@@ -105,23 +115,29 @@ const ProfMgmt = () => {
         }
     }
 
-    useEffect(() => {
-        const get_Requests = async () => {
-            const request = new Request
+    const get_Requests = async () => {
+        const request = new Request
 
-            try {
-                const response = await request.AdminRequests()
-                setRequests(response.data)
-            }
-
-            catch (err) {
-                console.log(err)
-            }
+        try {
+            const response = await request.AdminRequests()
+            setRequests(response.data)
         }
 
-        get_Requests();
+        catch (err) {
+            console.log(err)
+        }
+    }
 
+    useEffect(() => {
+        get_Requests();
     }, []);
+
+    useEffect(() => {
+        if (reload) {
+            get_Requests();
+        }
+    }, [reload]);
+
 
     return (
         <View>
@@ -141,8 +157,8 @@ const ProfMgmt = () => {
 
             <DoubleTab
                 Mark={left}
-                LeftButton="Agricultural Professional Requests"
-                RightButton="Agricultural Professionals"
+                LeftButton="Pending Requests"
+                RightButton="Approve Requests"
                 press_LeftAction={active_Left}
                 press_RightAction={active_Right}>
             </DoubleTab>
@@ -152,19 +168,23 @@ const ProfMgmt = () => {
                     <View style={{ marginHorizontal: 5 }}>
                         <View style={styles.titleRow}>
                             {titles.map((title, index) => (
-                                <View key={index} style={{ backgroundColor: '#005F41', width: title.width, marginHorizontal: 3, display: 'flex', flexDirection: 'row', justifyContent: 'center' }}><Text style={styles.text}>{title.head}</Text></View>
+                                <View key={index} style={[styles.titleCell, { width: title.width }]}>
+                                    <Text style={styles.text}>{title.head}</Text>
+                                </View>
                             ))}
                         </View>
 
                         <View>
                             {requests.map((person, index) => (
                                 <View style={{ position: 'relative' }}>
-                                    <View style={styles.requests} key={index}>
-                                        <Text style={{ color: 'black', width: '10%', marginHorizontal: 3, fontSize: 13 }}>{person.id}</Text>
-                                        <Text style={{ color: 'black', width: '20%', marginHorizontal: 3, fontSize: 13 }}>{person.name}</Text>
-                                        <Text style={{ color: 'black', width: '30%', marginHorizontal: 3, fontSize: 13 }}>{person.workplace}</Text>
-                                        <Text style={{ color: 'black', width: '25%', marginHorizontal: 3, fontSize: 13 }}>{person.designation}</Text>
-                                        <TouchableOpacity onPress={() => get_Options(index)}><Image style={styles.options} source={require('../../Assets/Icons/Options.png')} /></TouchableOpacity>
+                                    <View style={styles.userRow} key={index}>
+                                        {/* <Text style={{ color: 'black', width: '30%' }}>{person.id}</Text> */}
+                                        <Text style={{ color: 'black', width: '30%' }}>{person.name}</Text>
+                                        <Text style={{ color: 'black', width: '30%' }}>{person.workplace}</Text>
+                                        <Text style={{ color: 'black', width: '30%' }}>{person.designation}</Text>
+                                        <TouchableOpacity onPress={() => get_Options(index)}>
+                                            <Image style={styles.options} source={require('../../Assets/Icons/Options.png')} />
+                                        </TouchableOpacity>
                                     </View>
                                     {index == element && select == true && (
                                         <View style={{ display: 'flex', alignItems: 'flex-end' }}>
@@ -197,6 +217,17 @@ const styles = StyleSheet.create({
     titleRow: {
         display: 'flex',
         flexDirection: 'row',
+        marginTop: 0,
+    },
+    titleCell: {
+        backgroundColor: '#005F41',
+        marginRight: 2,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
+    text: {
+        color: 'white',
     },
 
     actionPopup: {
@@ -218,12 +249,17 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 
+    userRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginHorizontal: 5,
+        marginVertical: 6,
+    },
     options: {
         marginTop: 4,
         width: 18,
         height: 9
     },
-
     approve: {
         backgroundColor: '#005F41',
         color: 'white',

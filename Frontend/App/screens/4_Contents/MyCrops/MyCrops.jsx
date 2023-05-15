@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Request from '../../../API_Callings/Request';
 
 import {
+    Image,
+    ScrollView,
     StyleSheet,
-    View,
     Text,
     TouchableOpacity,
-    Image,
+    View,
     useWindowDimensions,
 } from 'react-native';
 
-import ThreeColumn from '../../../components/grids/ThreeColumn';
-import BodyHeader from '../../../components/headers/BodyHeader';
-import CropPopup from './CropPopup';
-import ActionPopup from '../../../components/popups/ActionPopup';
 import AppUser from '../../../StaticData/AppUser';
 import SelectedCrop from '../../../StaticData/SelectedCrop';
+import ThreeColumn from '../../../components/grids/ThreeColumn';
+import BodyHeader from '../../../components/headers/BodyHeader';
+import ActionPopup from '../../../components/popups/ActionPopup';
+import CropPopup from './CropPopup';
 
 const MyCrops = ({ navigation }) => {
 
@@ -25,6 +26,8 @@ const MyCrops = ({ navigation }) => {
     const [user, setUser] = useState('')
 
     const [crops, setCrops] = useState([])
+    const [records, setRecords] = useState([])
+
     const [popup, setPopup] = useState(false)
 
     const [select, setSelect] = useState('')
@@ -94,6 +97,25 @@ const MyCrops = ({ navigation }) => {
         setRemove(false)
     }, [refresh]);
 
+    useEffect(() => {
+        if (!user) return
+        console.log("user here", user);
+        const get_Records_By_UserId = async (userId) => {
+            const request = new Request
+            try {
+                const response = await request.GetRecordsByUserId(userId)
+                console.log(response.data);
+                setRecords(response.data)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+
+        get_Records_By_UserId(user)
+    }, [user])
+
+
     return (
         <View style={{ position: 'relative' }}>
             {popup && (<CropPopup press_Action={() => setPopup(false)} Farmer={user} Refresher={handdle_Refresh}></CropPopup>)}
@@ -114,7 +136,6 @@ const MyCrops = ({ navigation }) => {
 
             <View style={{ marginHorizontal: 7 }}>
                 <Text style={styles.text}>Crop Cultivation Plan</Text>
-
                 <View style={styles.grid}>
                     <ThreeColumn
                         Col_1='Crop'
@@ -134,6 +155,28 @@ const MyCrops = ({ navigation }) => {
                     <TouchableOpacity onPress={() => setPopup(true)}><View style={styles.button}><Text style={{ color: 'white' }}>+ Add Crop</Text></View></TouchableOpacity>
                 </View>
             </View>
+            <View style={{ marginHorizontal: 7 }}>
+                <Text style={styles.text}>Crop Cultivation History</Text>
+                <View style={styles.grid}>
+                    <ThreeColumn
+                        Col_1='Crop'
+                        Col_2='Cultivation Start Date'
+                        Col_3='Harvested Date'>
+                    </ThreeColumn>
+                    <View style={{ height: 300 }}>
+                        <ScrollView>
+                            {records.map((record, index) => (
+                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 2, marginBottom: 7 }} key={index}>
+                                    <Text style={{ flex: 1, fontWeight: 800 }}>{record.crop}</Text>
+                                    <Text style={{ flex: 1 }}>{record.start}</Text>
+                                    <Text style={{ flex: 1 }}>{record.harvested}</Text>
+                                </View>
+                            ))}
+                        </ScrollView>
+                    </View>
+                </View>
+            </View>
+
         </View>
     )
 }

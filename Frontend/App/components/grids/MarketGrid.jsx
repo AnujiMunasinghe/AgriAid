@@ -10,7 +10,7 @@ import PositiveButton from '../buttons/PositiveButton';
 
 const MarketGrid = (props) => {
 
-    console.log(props.crop);
+    // console.log(props.crop);
 
     return (
         <View style={styles.grid}>

@@ -7,7 +7,7 @@ class Request extends Component {
     serverURL = this.mainServer + ':8000'
     aiURL = this.mainServer + ':5000'
 
-    Register(data) {   
+    Register(data) {
         const _API = '/register';
         return Axios.post(this.serverURL + _API, data);
     };
@@ -82,13 +82,18 @@ class Request extends Component {
         return Axios.post(this.serverURL + _API, data);
     }
 
+    GetRecordsByUserId(userId) {
+        const _API = `/records/${userId}`;
+        return Axios.get(this.serverURL + _API);
+    }
+
     //------------------------------------------------------------------------------------------------
     //---------------------------------------------------------------------------------------------------------------
     Add_Market(data) {
         const _API = '/marketConditions';
         return Axios.post(this.aiURL + _API, data);
     }
-    
+
     Crop_Recommend(data) {
         const _API = '/cropRecommendations';
         return Axios.post(this.aiURL + _API, data);

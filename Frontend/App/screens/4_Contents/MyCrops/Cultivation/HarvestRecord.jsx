@@ -21,7 +21,7 @@ import PositiveButton from '../../../../components/buttons/PositiveButton';
 import BodyHeader from '../../../../components/headers/BodyHeader';
 import SelectionDropdown from '../../../../components/inputs/SelectionDropdown';
 
-const HarvestRecord = () => {
+const HarvestRecord = ({ navigation }) => {
 
     const [crop, setCrop] = useState('')
     const [startedDate, setStartedDate] = useState('')
@@ -118,6 +118,7 @@ const HarvestRecord = () => {
                 setQuantity(0)
                 setQuality('')
                 setHarvested('Pick a date')
+                navigation.navigate('MyCrops')
             }
 
             catch (err) {

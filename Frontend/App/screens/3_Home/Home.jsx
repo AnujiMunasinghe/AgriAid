@@ -1,8 +1,7 @@
-import React , {useEffect} from 'react';
-import { View, StyleSheet} from 'react-native';
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
 import SquareButton from '../../components/buttons/SquareButton';
 import HomeHeader from '../../components/headers/HomeHeader';
-import Request from '../../API_Callings/Request';
 
 const Home =( { navigation } )=> {
 

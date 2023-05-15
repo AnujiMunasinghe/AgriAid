@@ -113,7 +113,7 @@ const HarvestRecord = ({ navigation }) => {
             try {
                 const request = new Request
                 const response = await request.Record(record)
-                console.log("success", response.data)
+                // console.log("success", response.data)
 
                 setQuantity(0)
                 setQuality('')

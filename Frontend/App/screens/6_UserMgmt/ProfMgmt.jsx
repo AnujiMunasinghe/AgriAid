@@ -56,8 +56,7 @@ const ProfMgmt = () => {
         setSelect(true)
     }
 
-    const approve_Request = (id) => {
-        console.log("her", id);
+    const approve_Request = (id) => { 
         setReload(false)
 
         const popup = {
@@ -90,7 +89,7 @@ const ProfMgmt = () => {
                 const data = { id: manage.id, status: 'show' }
                 const request = new Request
                 const response = await request.ApproveRequest(data)
-                console.log(response.data)
+                // console.log(response.data)
                 setReload(true)
                 setConfirm(false)
             }
@@ -104,7 +103,7 @@ const ProfMgmt = () => {
             try {
                 const request = new Request
                 const response = await request.DeleteUser({ id: manage.id })
-                console.log(response.data)
+                // console.log(response.data)
                 setReload(true)
                 setConfirm(false)
             }

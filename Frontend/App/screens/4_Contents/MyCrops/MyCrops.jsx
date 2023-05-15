@@ -99,12 +99,12 @@ const MyCrops = ({ navigation }) => {
 
     useEffect(() => {
         if (!user) return
-        console.log("user here", user);
+        // console.log("user here", user);
         const get_Records_By_UserId = async (userId) => {
             const request = new Request
             try {
                 const response = await request.GetRecordsByUserId(userId)
-                console.log(response.data);
+                // console.log(response.data);
                 setRecords(response.data)
             }
             catch (err) {

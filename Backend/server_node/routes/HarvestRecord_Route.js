@@ -4,27 +4,46 @@ const dataModel = require("../models/HarvestRecord_Model")
 
 //API-01
 //save harvested record data
-router.route("/record").post( async(req, res) => {
+router.route("/record").post(async (req, res) => {
 
     try {
-            const harvest_Record = new dataModel({
-                farmer:req.body.farmer,
-                crop:req.body.crop,
-                start:req.body.start,
-                harvested:req.body.harvested,
-                quantity:req.body.quantity,
-                quality:req.body.quality
-            })
+        const harvest_Record = new dataModel({
+            farmer: req.body.farmer,
+            crop: req.body.crop,
+            start: req.body.start,
+            harvested: req.body.harvested,
+            quantity: req.body.quantity,
+            quality: req.body.quality
+        })
 
-            const response = await harvest_Record.save()
-            response != null ?
-                res.send('1') :res.send('0')
-     
+        const response = await harvest_Record.save()
+        response != null ?
+            res.send('1') : res.send('0')
+
     }
 
     catch (error) {
-        res.send('Error: ' +error)
+        res.send('Error: ' + error)
     }
 })
+
+// API-02
+// Get record list by farmer ID
+router.get("/records/:farmerId", async (req, res) => {
+    try {
+        const farmerId = req.params.farmerId;
+
+        // Basic validation
+        if (!farmerId) {
+            return res.status(400).json({ error: "Missing farmer ID" });
+        }
+
+        const records = await dataModel.find({ farmer: farmerId });
+
+        res.json(records);
+    } catch (error) {
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 module.exports = router;

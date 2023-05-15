@@ -7,7 +7,7 @@ const SelectionDropdown = ({ Label, List, Selected, Placeholder, expand }) => {
     return (
       <>
         <View style={styles.container}>
-          <Text style={styles.label}>{Label}</Text>
+          {Label && <Text style={styles.label}>{Label}</Text>}
           <View style={styles.selectBoxContainer}>
             <SelectList
               data={List}

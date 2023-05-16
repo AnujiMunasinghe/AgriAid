@@ -1,22 +1,23 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
-import Receivers from '../../../components/messages/Receivers';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
+import Receivers from '../../../components/messages/Receivers';
 const socket = io.connect("http://192.168.1.4:3001")
 
 import {
-    StyleSheet,
-    View,
-    Text,
+    Alert,
     Image,
-    TouchableOpacity
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
-import BodyHeader from '../../../components/headers/BodyHeader';
-import DoubleTab from '../../../components/sub-headers/DoubleTab';
 import Request from '../../../API_Callings/Request';
 import AppUser from '../../../StaticData/AppUser';
+import BodyHeader from '../../../components/headers/BodyHeader';
 import RequestBox from '../../../components/popups/RequestBox';
+import DoubleTab from '../../../components/sub-headers/DoubleTab';
+import RatingPopup from './ratingPopUp';
 
 const CropAdvisiors = () => {
 
@@ -120,9 +121,71 @@ const CropAdvisiors = () => {
         setClick(false)
     }
 
+    const [popup, setPopup] = useState(false)
+    const [receiverId, setReceiverId] = useState('')
+    const [reload, setReload] = useState(false)
+
+    const rateAdvisor = async (rate) => {
+        if (rate === 0) {
+            Alert.alert('Something went wrong..')
+            return
+        };
+        if (receiverId === '') {
+            Alert.alert('Something went wrong..')
+            return
+        };
+
+        setReload(false);
+
+        try {
+            const request = new Request();
+            const response = await request.UpdateUserRateByUserId(receiverId, { rating: rate });
+            console.log(response.data);
+            Alert.alert('Success', 'User rate updated successfully');
+            setPopup(false);
+            setReload(true);
+        } catch (error) {
+            console.log(error);
+            Alert.alert('Error', 'Failed to update user rate');
+        }
+    }
+
+
+    useEffect(() => {
+        if (!reload) return
+
+        const get_Professionals = async () => {
+            const request = new Request
+            try {
+                const response = await request.Advice()
+                if (response != null) {
+                    setAdvisiors(response.data)
+                }
+                else {
+                    console.log('_ERROR')
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
+        }
+        get_Professionals()
+
+        //Getting Chat
+        socket.emit("previous", { role: 0, need: app_user.fetch().id })
+        socket.on("inbox", (allMSGS) => {
+            if (allMSGS != 0) {
+                setAllMessages(allMSGS)
+                setShowChat(true)
+            }
+        })
+    }, [reload])
+
 
     return (
-        <View>
+        <View style={{ position: 'relative' }}>
+            {popup && (<RatingPopup press_Action={() => setPopup(false)} rateAdvisor={rateAdvisor}  ></RatingPopup>)}
+
             <BodyHeader Title='Crop Advisiory'></BodyHeader>
 
             {click && (
@@ -187,7 +250,10 @@ const CropAdvisiors = () => {
                                     Data={sender.data}
                                     press_Action={() => show_Chatting(index)}
                                     OpenChat={sender.chat}
-                                    Role='Farmer'>
+                                    Role='Farmer'
+                                    show_PopUp={() => { setPopup(true) }}
+                                    setReceiverId={setReceiverId}
+                                >
                                 </Receivers>
                             ))}
                         </View>

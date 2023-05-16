@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const dataModel = require("../models/users.model") 
+const dataModel = require("../models/users.model")
 const { v4: uuidv4 } = require('uuid');
 
 router.route('/register').post(async (req, res) => {
@@ -172,5 +172,37 @@ router.route("/acceptedUsers").post(async (req, res) => {
 
     }
 })
+
+router.route('/users/:id/rate').patch(async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rating } = req.body;
+
+        if (!rating) {
+            return res.status(400).json({ status: "error", message: "Missing rating field" });
+        }
+
+        const user = await dataModel.findOne({ id });
+
+        if (!user) {
+            return res.status(404).json({ status: "error", message: "User not found" });
+        }
+
+        user.rating = rating;
+        user.updated_date = new Date();
+
+        const response = await user.save();
+
+        if (response) {
+            return res.status(200).json({ status: "success", message: "User rate updated successfully" });
+        }
+
+        throw new Error("Failed to update user rate");
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: "error", message: "Internal server error" });
+    }
+});
+
 
 module.exports = router;

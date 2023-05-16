@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import Axios from "axios";
+import { Component } from "react";
 
 class Request extends Component {
     mainServer = 'http://192.168.1.4'
@@ -85,6 +85,11 @@ class Request extends Component {
     GetRecordsByUserId(userId) {
         const _API = `/records/${userId}`;
         return Axios.get(this.serverURL + _API);
+    }
+
+    UpdateUserRateByUserId(userId, data) {
+        const _API = `/users/${userId}/rate`;
+        return Axios.patch(this.serverURL + _API, data);
     }
 
     //------------------------------------------------------------------------------------------------

@@ -1,20 +1,19 @@
-import React, {useState, useRef} from 'react';
+import React, { useRef, useState } from 'react';
 import io from 'socket.io-client';
-const socket = io.connect("http://192.168.1.4:3001")
 import AppUser from '../../StaticData/AppUser';
+const socket = io.connect("http://192.168.1.4:3001")
 
 import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  Image,
-  TextInput,
-  Button,
-  ScrollView
+    Image,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
 } from 'react-native';
 
-const Receivers =( props )=> {
+const Receivers = (props) => {
 
     const openChat = props.OpenChat
     const [messages, setMessages] = useState(props.Data)
@@ -23,7 +22,7 @@ const Receivers =( props )=> {
 
     const scrollViewRef = useRef();
 
-    const send_Message =async(message)=> {
+    const send_Message = async (message) => {
 
         const app_user = new AppUser
 
@@ -37,12 +36,12 @@ const Receivers =( props )=> {
                 m_TEXT: text
             }
 
-            const newMsg =  {
-                                message:text,
-                                time:'',
-                                type:"professional"
-                            }
-                        
+            const newMsg = {
+                message: text,
+                time: '',
+                type: "professional"
+            }
+
             setMessages([...messages, newMsg])
             scrollViewRef.current.scrollToEnd({ animated: true });
             await socket.emit("chat", messageBody)
@@ -58,12 +57,12 @@ const Receivers =( props )=> {
                 m_TEXT: text
             }
 
-            const newMsg =  {
-                                message:text,
-                                time:'',
-                                type:"farmer"
-                            }
-                        
+            const newMsg = {
+                message: text,
+                time: '',
+                type: "farmer"
+            }
+
             setMessages([...messages, newMsg])
             scrollViewRef.current.scrollToEnd({ animated: true });
             await socket.emit("chat", messageBody)
@@ -71,22 +70,23 @@ const Receivers =( props )=> {
 
     }
 
+
     return (
         <View>
             <TouchableOpacity onPress={props.press_Action}>
                 <View style={styles.button}>
                     <View style={styles.name}>
-                        <Image style={styles.image} source={require('../../Assets/Icons/Account.png')}/>
-                        <Text style={styles.title}>{ props.Sender }</Text>
+                        <Image style={styles.image} source={require('../../Assets/Icons/Account.png')} />
+                        <Text style={styles.title}>{props.Sender}</Text>
                     </View>
 
                     <View style={styles.name}>
                         {!openChat && (
-                            <Image style={styles.image} source={require('../../Assets/Icons/Expand.png')}/>
+                            <Image style={styles.image} source={require('../../Assets/Icons/Expand.png')} />
                         )}
 
                         {openChat && (
-                            <Image style={styles.image} source={require('../../Assets/Icons/CollapseH.png')}/>
+                            <Image style={styles.image} source={require('../../Assets/Icons/CollapseH.png')} />
                         )}
                     </View>
                 </View>
@@ -116,7 +116,7 @@ const Receivers =( props )=> {
                         ))}
                     </ScrollView>
 
-                    <View style={{display:'flex', flexDirection:'row', justifyContent:'center', marginVertical:20}}>
+                    <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', marginVertical: 20 }}>
                         <TextInput
                             style={styles.input}
                             multiline={true}
@@ -127,18 +127,25 @@ const Receivers =( props )=> {
                             placeholder='Message'
                             placeholderTextColor={'grey'}
                             value={text}
-                            onChangeText={(enter)=> setText(enter)}>
+                            onChangeText={(enter) => setText(enter)}     >
                         </TextInput>
-
+                        <TouchableOpacity onPress={() => {
+                            props.setReceiverId(props.Id)
+                            props.show_PopUp()
+                        }}>
+                            <View style={{ borderStyle: 'solid', borderWidth: 2, height: 35, width: 35, borderRadius: 100, paddingTop: 2, paddingLeft: 2, marginLeft: 3, backgroundColor: '#D9D9D9' }}>
+                                <Image style={{ height: 25, width: 25 }} source={require('../../Assets/Icons/star.png')} />
+                            </View>
+                        </TouchableOpacity>
                         <TouchableOpacity onPress={send_Message}>
-                            <View style={{borderStyle:'solid', borderWidth:2, height:35, width:35, borderRadius:100, paddingTop:2, paddingLeft:2, marginLeft:3, backgroundColor:'#D9D9D9'}}>
-                                <Image style={{height:25, width:25}} source={require('../../Assets/Icons/Send.png')}/>
+                            <View style={{ borderStyle: 'solid', borderWidth: 2, height: 35, width: 35, borderRadius: 100, paddingTop: 2, paddingLeft: 2, marginLeft: 3, backgroundColor: '#D9D9D9' }}>
+                                <Image style={{ height: 25, width: 25 }} source={require('../../Assets/Icons/Send.png')} />
                             </View>
                         </TouchableOpacity>
                     </View>
                 </View>
             )}
-            
+
         </View>
     )
 }
@@ -146,108 +153,108 @@ const Receivers =( props )=> {
 const styles = StyleSheet.create({
 
     button: {
-        marginHorizontal:6,
-        marginVertical:6,
-        paddingHorizontal:10,
+        marginHorizontal: 6,
+        marginVertical: 6,
+        paddingHorizontal: 10,
         backgroundColor: 'white',
-        borderStyle:'solid',
-        borderWidth:1,
-        display:'flex',
-        flexDirection:'row',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        display: 'flex',
+        flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'space-between',
-        height:38,
+        justifyContent: 'space-between',
+        height: 38,
     },
 
     input: {
-        width:'80%',
-        borderStyle:'solid',
-        borderWidth:2,
-        borderColor:'black',
-        borderRadius:20,
-        color:'black',
-        height:35,
-        fontStyle:'italic',
-        fontSize:15,
-        backgroundColor:'#D9D9D9'
+        width: '75%',
+        borderStyle: 'solid',
+        borderWidth: 2,
+        borderColor: 'black',
+        borderRadius: 20,
+        color: 'black',
+        height: 35,
+        fontStyle: 'italic',
+        fontSize: 15,
+        backgroundColor: '#D9D9D9'
     },
 
     title: {
-        marginLeft:6,
+        marginLeft: 6,
         color: 'black',
         fontWeight: 700,
         fontSize: 16
     },
 
-    name : {
-        display:'flex',
-        flexDirection:'row',
-        alignItems:'center',
+    name: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
         justifyContent: 'flex-start'
     },
 
     image: {
-        height:20,
-        width:20
+        height: 20,
+        width: 20
     },
 
-    notification : {
-        height:20,
-        width:20,
-        borderRadius:30,
-        backgroundColor:'#005F41',
-        display:'flex',
-        alignItems:'center',
-        justifyContent:'center',
-        marginRight:10
+    notification: {
+        height: 20,
+        width: 20,
+        borderRadius: 30,
+        backgroundColor: '#005F41',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 10
     },
 
-    chatBox : {
-        marginTop:-7,
-        height:300,
-        backgroundColor:'white',
-        borderStyle:'solid',
-        borderWidth:1,
-        borderTopWidth:0,
-        marginHorizontal:6,
+    chatBox: {
+        marginTop: -7,
+        height: 300,
+        backgroundColor: 'white',
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderTopWidth: 0,
+        marginHorizontal: 6,
     },
 
     msg: {
-        color:'white',
-        fontSize:16,
-        
+        color: 'white',
+        fontSize: 16,
+
     },
 
     scroller: {
-        overflow:'scroll',
+        overflow: 'scroll',
     },
 
     sender: {
-        maxWidth:220,
-        paddingHorizontal:7,
-        marginVertical:6,
-        paddingVertical:6,
-        borderRadius:6
+        maxWidth: 220,
+        paddingHorizontal: 7,
+        marginVertical: 6,
+        paddingVertical: 6,
+        borderRadius: 6
     },
 
-    farmer : {
-        backgroundColor:'black',
+    farmer: {
+        backgroundColor: 'black',
     },
 
-    advisor : {
-        backgroundColor:'grey'
+    advisor: {
+        backgroundColor: 'grey'
     },
 
     f: {
-        paddingLeft:10,
-        display:'flex',
-        alignItems:'flex-start'
+        paddingLeft: 10,
+        display: 'flex',
+        alignItems: 'flex-start'
     },
 
-    a:{
-        paddingRight:10,
-        display:'flex',
-        alignItems:'flex-end'
+    a: {
+        paddingRight: 10,
+        display: 'flex',
+        alignItems: 'flex-end'
     }
 
 })

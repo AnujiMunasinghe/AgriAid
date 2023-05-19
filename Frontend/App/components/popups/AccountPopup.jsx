@@ -41,7 +41,7 @@ const AccountPopup = (props) => {
                         <View style={styles.details}>
                             <Image style={styles.accountLogo} source={require('../../Assets/Icons/Account.png')} />
                             <View>
-                                <Text style={styles.name}>{data.id}: {data.name}</Text>
+                                <Text style={styles.name}> {data.name}</Text>
                                 <Text style={styles.email}>{data.email}</Text>
                             </View>
                         </View>
@@ -118,13 +118,13 @@ const styles = StyleSheet.create({
 
     name: {
         color: 'black',
-        fontSize: 14,
+        fontSize: 16,
         fontWeight: 700
     },
 
     email: {
         color: '#989595',
-        fontSize: 11
+        fontSize: 14
     },
 
     button: {

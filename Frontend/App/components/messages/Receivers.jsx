@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import AppUser from '../../StaticData/AppUser';
-const socket = io.connect("http://192.168.1.4:3001")
+const socket = io.connect("http://192.168.1.3:3001")
 
 import {
     Image,
@@ -17,6 +17,7 @@ const Receivers = (props) => {
 
     const openChat = props.OpenChat
     const [messages, setMessages] = useState(props.Data)
+    const [data, setData] = useState({ id: '', name: '', email: '', role: '' })
 
     const [text, setText] = useState('')
 
@@ -70,6 +71,10 @@ const Receivers = (props) => {
 
     }
 
+    useEffect(() => {
+        const user = new AppUser
+        setData(user.fetch())
+    }, []);
 
     return (
         <View>
@@ -129,14 +134,16 @@ const Receivers = (props) => {
                             value={text}
                             onChangeText={(enter) => setText(enter)}     >
                         </TextInput>
-                        <TouchableOpacity onPress={() => {
-                            props.setReceiverId(props.Id)
-                            props.show_PopUp()
-                        }}>
-                            <View style={{ borderStyle: 'solid', borderWidth: 2, height: 35, width: 35, borderRadius: 100, paddingTop: 2, paddingLeft: 2, marginLeft: 3, backgroundColor: '#D9D9D9' }}>
-                                <Image style={{ height: 25, width: 25 }} source={require('../../Assets/Icons/star.png')} />
-                            </View>
-                        </TouchableOpacity>
+                        {data.role == "Farmer" && <>
+                            <TouchableOpacity onPress={() => {
+                                props.setReceiverId(props.Id)
+                                props.show_PopUp()
+                            }}>
+                                <View style={{ borderStyle: 'solid', borderWidth: 2, height: 35, width: 35, borderRadius: 100, paddingTop: 2, paddingLeft: 2, marginLeft: 3, backgroundColor: '#D9D9D9' }}>
+                                    <Image style={{ height: 25, width: 25 }} source={require('../../Assets/Icons/star.png')} />
+                                </View>
+                            </TouchableOpacity>
+                        </>}
                         <TouchableOpacity onPress={send_Message}>
                             <View style={{ borderStyle: 'solid', borderWidth: 2, height: 35, width: 35, borderRadius: 100, paddingTop: 2, paddingLeft: 2, marginLeft: 3, backgroundColor: '#D9D9D9' }}>
                                 <Image style={{ height: 25, width: 25 }} source={require('../../Assets/Icons/Send.png')} />

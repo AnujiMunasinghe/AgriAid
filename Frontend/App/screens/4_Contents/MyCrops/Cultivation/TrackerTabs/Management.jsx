@@ -301,10 +301,11 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked1 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked1 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked1 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked1 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Weeding</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked1 === 3 ? -6 : 0, textDecorationLine: marked1 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
+
 
                                         {!weedExpand && (
                                             <Image style={styles.options} source={require('../../../../../Assets/Icons/Collapse.png')} />
@@ -344,9 +345,9 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked2 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked2 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked2 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked2 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Soiling</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked2 === 3 ? -6 : 0, textDecorationLine: marked2 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
 
                                         {!soilExpand && (
@@ -386,9 +387,9 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked3 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked3 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked3 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Pruning</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked3 === 3 ? -6 : 0, textDecorationLine: marked3 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
 
                                         {!pruneExpand && (
@@ -428,9 +429,9 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked4 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked4 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked4 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked4 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Irrigation</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked4 === 3 ? -6 : 0, textDecorationLine: marked4 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
 
                                         {!irrigateExpand && (
@@ -471,9 +472,9 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked5 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked5 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked5 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked5 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Fertiliation</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked5 === 3 ? -6 : 0, textDecorationLine: marked5 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
 
                                         {!fertilieExpand && (
@@ -513,9 +514,9 @@ const Management = (props) => {
                                             <View style={{ height: 20, width: 20, borderWidth: 2, borderColor: 'white', borderRadius: 5, marginLeft: 15, justifyContent: 'center', alignItems: 'center' }}>
                                                 {!marked6 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
                                                 {marked6 == 2 && <Text style={{ color: 'white', fontSize: 16 }}>✓</Text>}
-                                                {marked6 == 3 && <Text style={{ color: 'white', fontSize: 16 }}></Text>}
+                                                {marked6 == 3 && <Text style={{ color: 'white', fontSize: 16, textDecorationLine: 'line-through' }}></Text>}
                                             </View>
-                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8 }}>T0{index + 1} | Harvesting</Text>
+                                            <Text style={{ color: 'white', fontSize: 19, fontWeight: 500, marginLeft: 8, marginTop: marked6 === 3 ? -6 : 0, textDecorationLine: marked6 == 3 ? 'line-through' : 'none' }}>T0{index + 1} | Weeding</Text>
                                         </View>
 
                                         {!harvestExpand && (

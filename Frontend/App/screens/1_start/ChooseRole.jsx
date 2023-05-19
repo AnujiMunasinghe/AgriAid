@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     },
 
     logoBox : {
-        height: '50%',
+        height: '55%',
         alignItems: 'center',
         justifyContent: 'center'
     },

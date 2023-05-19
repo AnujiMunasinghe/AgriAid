@@ -10,7 +10,7 @@ chatRoom(server)
 const clusterURL = "mongodb+srv://admin:i5T3X5lWOSCj32ii@cluster0.5oe0dnt.mongodb.net/?retryWrites=true&w=majority";
 const PORT = 8000;
 const CHAT_PORT = 3001;
-const IP_ADDRESS = "192.168.1.4";
+const IP_ADDRESS = "192.168.1.3";
 
 // Middleware
 app.use(cors());

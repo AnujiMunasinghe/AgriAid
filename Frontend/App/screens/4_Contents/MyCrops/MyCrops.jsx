@@ -167,7 +167,8 @@ const MyCrops = ({ navigation }) => {
                         <ScrollView>
                             {records.map((record, index) => (
                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 2, marginBottom: 7 }} key={index}>
-                                    <Text style={{ flex: 1, fontWeight: 800 }}>{record.crop}</Text>
+                                    {/* <Text style={{ flex: 1, fontWeight: 800 }}>{record.crop}</Text> */}
+                                    <TouchableOpacity onPress={() => plan_Cultivation(record.crop)}><Text style={{ color: 'black', fontWeight: 800, width: 80 }}>{record.crop}</Text></TouchableOpacity>
                                     <Text style={{ flex: 1 }}>{record.start}</Text>
                                     <Text style={{ flex: 1 }}>{record.harvested}</Text>
                                 </View>

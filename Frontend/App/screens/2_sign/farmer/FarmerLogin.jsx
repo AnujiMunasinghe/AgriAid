@@ -36,21 +36,21 @@ const FarmerLogin = ({ navigation }) => {
             switch (route.params) {
                 case 0: {
                     const app_user = new AppUser
-                    app_user.AppUser(id, name, email)
+                    app_user.AppUser(id, name, email, job)
                     navigation.navigate('Home');
                     break;
                 }
 
                 case 1: {
                     const app_user = new AppUser
-                    app_user.AppUser(id, name, email)
+                    app_user.AppUser(id, name, email, job)
                     navigation.navigate('CropAdvisory');
                     break;
                 }
 
                 case 2: {
                     const app_user = new AppUser
-                    app_user.AppUser(id, name, email)
+                    app_user.AppUser(id, name, email, job)
                     navigation.navigate('Management');
                     break;
                 }

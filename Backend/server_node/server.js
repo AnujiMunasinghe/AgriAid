@@ -29,7 +29,7 @@ app.use("/", require("./routes/users.routes"));
 app.use("/", require("./routes/CropData_Route"));
 app.use("/", require("./routes/Cultivation_Route"));
 app.use("/", require("./routes/HarvestRecord_Route"));
-app.use("/", require("./routes/realData.routes"));
+app.use("/", require("./routes/realCropDetails.routes"));
 
 
 // Server listening

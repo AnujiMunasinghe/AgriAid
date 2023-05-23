@@ -4,7 +4,7 @@ const RealCropDetails = require("../models/RealCropDetails.model"); // Assuming 
 
 
 // GET API endpoint to retrieve all data
-router.get("/real-data/all", async (req, res) => {
+router.get("/real-crop-details/all", async (req, res) => {
   try {
     // Find all data
     const data = await RealCropDetails.find();
@@ -22,7 +22,7 @@ router.get("/real-data/all", async (req, res) => {
 
 
 // GET API endpoint to retrieve data based on region and crop
-router.get("/real-data", async (req, res) => {
+router.get("/real-crop-details", async (req, res) => {
   const { region, crop } = req.query;
 
   try {

@@ -1,8 +1,9 @@
+import Axios from "axios";
 import React, { useEffect, useState } from 'react';
 import {
+    Alert,
     StyleSheet,
-    View,
-    Alert
+    View
 } from 'react-native';
 import PositiveButton from '../../../../components/buttons/PositiveButton';
 import MarketGrid from '../../../../components/grids/MarketGrid';
@@ -24,27 +25,58 @@ const CurrentMarket = (props) => {
         setRegion(region);
     };
 
-    const handleEnterPress = () => {
-        // Handle enter button press here
-        // const cropData = {
-        //     name: crop,
-        //     region: region,
-        //     type: 'current'
-        // }
-
-        // await props.posting_Data(cropData)
+    const handleEnterPress = async () => {
         if (!crop || !region) {
-            Alert.alert('Error', 'Please fill in all required fields')
-            return
+            Alert.alert('Error', 'Please fill in all required fields');
+            return;
         }
-        setModelData({
-            Crop: crop,
-            Type: 'current',
-            Region: region,
-            Data: [0, 0, 0]
-        })
-        setShowConditions(true)
+
+        console.log(crop);
+        console.log(region);
+
+        try {
+            const response = await Axios.get("http://192.168.1.3:8000/real-crop-details", {
+                params: {
+                    region: region,
+                    crop: crop
+                }
+            });
+
+            if (response.status === 200) {
+                const data = response.data;
+                // Handle the retrieved data here
+                console.log(data["Demand (per month)"]);
+                setModelData({
+                    Crop: crop,
+                    Type: 'current',
+                    Region: region,
+                    Data: [data["Price (per Kg)"], data["Demand (per month)"], data["Supply  (per month)"]]
+                })
+                setShowConditions(true)
+            } else {
+                Alert.alert("Error", "Failed to retrieve data. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
+                console.log(error.response.data);
+                console.log(error.response.status);
+                console.log(error.response.headers);
+                Alert.alert("Error", error.response.data.error || "Failed to retrieve data. Please try again.");
+            } else if (error.request) {
+                // The request was made but no response was received
+                console.log(error.request);
+                Alert.alert("Error", "No response received from server. Please try again.");
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
+                Alert.alert("Error", "Failed to retrieve data. Please try again.");
+            }
+        }
     };
+
 
     useEffect(() => {
         if (!setShowConditions) {
@@ -86,7 +118,7 @@ const CurrentMarket = (props) => {
             <View style={styles.container}>
                 <SelectionDropdown
                     Label="Select Crop"
-                    List={props.CropList}
+                    List={[`Capsicum`, `Green Chilli`]}
                     Selected={handleCropChange}
                     expand={true}
                 />

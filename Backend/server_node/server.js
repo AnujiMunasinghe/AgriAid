@@ -30,7 +30,7 @@ app.use("/", require("./routes/CropData_Route"));
 app.use("/", require("./routes/Cultivation_Route"));
 app.use("/", require("./routes/HarvestRecord_Route"));
 app.use("/", require("./routes/realCropDetails.routes"));
-
+app.use("/", require("./routes/cropRecommendationDetails.routes"));
 
 // Server listening
 app.listen(PORT, IP_ADDRESS, () => console.log(`App running on http://${IP_ADDRESS}:${PORT}`));

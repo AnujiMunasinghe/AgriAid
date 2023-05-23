@@ -18,7 +18,7 @@ const CropRecommendations = () => {
     const [selectRegion, setSelectRegion] = useState('')
     const [selectQuarter, setSelectQuarter] = useState('')
 
-    const [showConditions, setShowConditions] = useState(false)
+    const [showConditions, setShowConditions] = useState(false) 
 
     const Regions = [
         "Colombo",

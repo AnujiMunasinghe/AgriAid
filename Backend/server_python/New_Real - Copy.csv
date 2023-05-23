@@ -1,51 +1,51 @@
-Region,Crop,Demand (per month),Supply  (per month),Price (per Kg),test
-Colombo,Capsicum,135 500 kg,120 200 kg,Rs. 731.92,tes
-Puttalam,Capsicum,103 456 kg,89 400 kg,Rs. 712,tes
-Jaffna,Capsicum,98 436 kg,93 457 kg,Rs. 386.67,tes
-Vavuniya,Capsicum,109 643 kg,98 587 kg,Rs. 604,tes
-Kilinochchi,Capsicum,84 760 kg,78 954 kg,Rs. 618,tes
-Mullaitivu,Capsicum,67 830 kg,59 473 kg,Rs. 596,tes
-Galle,Capsicum,114 502 kg,110 764 kg,Rs. 625,tes
-Kandy,Capsicum,124 550 kg,117 240 kg,Rs. 720,tes
-Gampaha,Capsicum,108 500 kg,102 453 kg,Rs. 600,tes
-Kurunegala,Capsicum,130 500 kg,129 250 kg,Rs. 552,tes
-Anuradhapura,Capsicum,131 523kg,130 800 kg,Rs. 640,tes
-Matara,Capsicum,105 234 kg,102 450 kg,Rs. 637.50,tes
-Polonnaruwa,Capsicum,119 567 kg,115 670 kg,Rs. 620,tes
-Badulla,Capsicum,99 245 kg,98 564 kg,Rs. 632,tes
-Mannar,Capsicum,97 309 kg,95 345 kg,Rs. 650,tes
-Kalutara,Capsicum,128 456 kg,124 679 kg,Rs. 824,tes
-Batticaloa,Capsicum,130 493 kg,128 654 kg,Rs. 608,tes
-Ratnapura,Capsicum,120 924 kg,118 230 kg,Rs. 596,tes
-Trincomalee,Capsicum,128 340 kg,127 983kg,Rs. 522,tes
-Hambantota,Capsicum,131 356 kg,130 240 kg,Rs. 551.25,tes
-Nuwara Eliya,Capsicum,105 835 kg,103 456 kg,Rs. 600,tes
-Kegalle,Capsicum,112 398 kg,110 345 kg,Rs. 592,tes
-Monaragala,Capsicum,125 935 kg,124 534 kg,Rs. 640,tes
-Ampara,Capsicum,954 738 kg,93 650 kg,Rs. 655,tes
-Matala,Capsicum,117 294 kg,115 284 kg,Rs.440,tes
-Jaffna,Green Chilli,250 456 kg,233 333 kg,Rs. 330,tes
-Vavuniya,Green Chilli,212 385 kg,210 567 kg,Rs.410,tes
-Matala,Green Chilli,203 245 kg,198 245 kg,Rs. 630,tes
-Kilinochchi,Green Chilli,200 435 kg,185 348 kg,Rs. 418,tes
-Mullaitivu,Green Chilli,215 063 kg,213 567 kg,Rs. 416,tes
-Galle,Green Chilli,253 840 kg,250 764 kg,Rs. 390,tes
-Kandy,Green Chilli,174 259 kg,173 678 kg,Rs. 488,tes
-Gampaha,Green Chilli,198 802 kg,195 786 kg,Rs. 550,tes
-Kurunegala,Green Chilli,209 783 kg,266 865 kg,Rs. 460,tes
-Anuradhapura,Green Chilli,255 769 kg,248 637 kg,Rs. 440,tes
-Matara,Green Chilli,230 495 kg,225 678 kg,Rs. 507.50,tes
-Polonnaruwa,Green Chilli,2324 755 kg,220 256 kg,Rs. 518,tes
-Badulla,Green Chilli,224 975 kg,221 567 kg,Rs. 440,tes
-Mannar,Green Chilli,202 394 kg,199 227 kg,Rs. 440,tes
-Kalutara,Green Chilli,230 492 kg,228 356 kg,Rs. 420,tes
-Batticaloa,Green Chilli,245 384 kg,242 378 kg,Rs. 408,tes
-Ratnapura,Green Chilli,218 283 kg,215 267 kg,Rs. 590,tes
-Trincomalee,Green Chilli,237 394 kg,234 856 kg,Rs. 452,tes
-Hambantota,Green Chilli,248 905 kg,246 284 kg,Rs. 505.71,tes
-Nuwara Eliya,Green Chilli,184 374 kg,180 345 kg,Rs. 480,tes
-Kegalle,Green Chilli,222 937 kg,219 245 kg,Rs. 484,tes
-Monaragala,Green Chilli,224 884 kg,222 934 kg,Rs. 440,tes
-Ampara,Green Chilli,234 835 kg,230 465 kg,Rs. 500,tes
-Puttalam,Green Chilli,170 428 kg,160 367 kg,Rs. 404,tes
-Colombo,Green Chilli,248 274 kg,244 835 kg,Rs. 540.37,tes
+Region,Crop,Demand,Supply,Price,test
+Colombo,Capsicum," 135,500.00 "," 120,200.00 ", 731.92 ,tes
+Puttalam,Capsicum," 103,456.00 "," 89,400.00 ", 712.00 ,tes
+Jaffna,Capsicum," 98,436.00 "," 93,457.00 ", 386.67 ,tes
+Vavuniya,Capsicum," 109,643.00 "," 98,587.00 ", 604.00 ,tes
+Kilinochchi,Capsicum," 84,760.00 "," 78,954.00 ", 618.00 ,tes
+Mullaitivu,Capsicum," 67,830.00 "," 59,473.00 ", 596.00 ,tes
+Galle,Capsicum," 114,502.00 "," 110,764.00 ", 625.00 ,tes
+Kandy,Capsicum," 124,550.00 "," 117,240.00 ", 720.00 ,tes
+Gampaha,Capsicum," 108,500.00 "," 102,453.00 ", 600.00 ,tes
+Kurunegala,Capsicum," 130,500.00 "," 129,250.00 ", 552.00 ,tes
+Anuradhapura,Capsicum," 131,523.00 "," 130,800.00 ", 640.00 ,tes
+Matara,Capsicum," 105,234.00 "," 102,450.00 ", 637.50 ,tes
+Polonnaruwa,Capsicum," 119,567.00 "," 115,670.00 ", 620.00 ,tes
+Badulla,Capsicum," 99,245.00 "," 98,564.00 ", 632.00 ,tes
+Mannar,Capsicum," 97,309.00 "," 95,345.00 ", 650.00 ,tes
+Kalutara,Capsicum," 128,456.00 "," 124,679.00 ", 824.00 ,tes
+Batticaloa,Capsicum," 130,493.00 "," 128,654.00 ", 608.00 ,tes
+Ratnapura,Capsicum," 120,924.00 "," 118,230.00 ", 596.00 ,tes
+Trincomalee,Capsicum," 128,340.00 "," 127,983.00 ", 522.00 ,tes
+Hambantota,Capsicum," 131,356.00 "," 130,240.00 ", 551.25 ,tes
+Nuwara Eliya,Capsicum," 105,835.00 "," 103,456.00 ", 600.00 ,tes
+Kegalle,Capsicum," 112,398.00 "," 110,345.00 ", 592.00 ,tes
+Monaragala,Capsicum," 125,935.00 "," 124,534.00 ", 640.00 ,tes
+Ampara,Capsicum," 954,738.00 "," 93,650.00 ", 655.00 ,tes
+Matala,Capsicum," 117,294.00 "," 115,284.00 ", Rs.440 ,tes
+Jaffna,Green Chilli," 250,456.00 "," 233,333.00 ", 330.00 ,tes
+Vavuniya,Green Chilli," 212,385.00 "," 210,567.00 ", Rs.410 ,tes
+Matala,Green Chilli," 203,245.00 "," 198,245.00 ", 630.00 ,tes
+Kilinochchi,Green Chilli," 200,435.00 "," 185,348.00 ", 418.00 ,tes
+Mullaitivu,Green Chilli," 215,063.00 "," 213,567.00 ", 416.00 ,tes
+Galle,Green Chilli," 253,840.00 "," 250,764.00 ", 390.00 ,tes
+Kandy,Green Chilli," 174,259.00 "," 173,678.00 ", 488.00 ,tes
+Gampaha,Green Chilli," 198,802.00 "," 195,786.00 ", 550.00 ,tes
+Kurunegala,Green Chilli," 209,783.00 "," 266,865.00 ", 460.00 ,tes
+Anuradhapura,Green Chilli," 255,769.00 "," 248,637.00 ", 440.00 ,tes
+Matara,Green Chilli," 230,495.00 "," 225,678.00 ", 507.50 ,tes
+Polonnaruwa,Green Chilli," 2,324,755.00 "," 220,256.00 ", 518.00 ,tes
+Badulla,Green Chilli," 224,975.00 "," 221,567.00 ", 440.00 ,tes
+Mannar,Green Chilli," 202,394.00 "," 199,227.00 ", 440.00 ,tes
+Kalutara,Green Chilli," 230,492.00 "," 228,356.00 ", 420.00 ,tes
+Batticaloa,Green Chilli," 245,384.00 "," 242,378.00 ", 408.00 ,tes
+Ratnapura,Green Chilli," 218,283.00 "," 215,267.00 ", 590.00 ,tes
+Trincomalee,Green Chilli," 237,394.00 "," 234,856.00 ", 452.00 ,tes
+Hambantota,Green Chilli," 248,905.00 "," 246,284.00 ", 505.71 ,tes
+Nuwara Eliya,Green Chilli," 184,374.00 "," 180,345.00 ", 480.00 ,tes
+Kegalle,Green Chilli," 222,937.00 "," 219,245.00 ", 484.00 ,tes
+Monaragala,Green Chilli," 224,884.00 "," 222,934.00 ", 440.00 ,tes
+Ampara,Green Chilli," 234,835.00 "," 230,465.00 ", 500.00 ,tes
+Puttalam,Green Chilli," 170,428.00 "," 160,367.00 ", 404.00 ,tes
+Colombo,Green Chilli," 248,274.00 "," 244,835.00 ", 540.37 ,tes

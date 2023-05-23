@@ -13,9 +13,11 @@ const CurrentMarket = (props) => {
     const [crop, setCrop] = useState('');
     const [region, setRegion] = useState('');
 
+    const [crops, setCrops] = useState([])
+    const [regions, setRegions] = useState([])
+
     const [showConditions, setShowConditions] = useState(false)
     const [modelData, setModelData] = useState()
-
 
     const handleCropChange = (crop) => {
         setCrop(crop);
@@ -31,9 +33,6 @@ const CurrentMarket = (props) => {
             return;
         }
 
-        console.log(crop);
-        console.log(region);
-
         try {
             const response = await Axios.get("http://192.168.1.3:8000/real-crop-details", {
                 params: {
@@ -44,13 +43,12 @@ const CurrentMarket = (props) => {
 
             if (response.status === 200) {
                 const data = response.data;
-                // Handle the retrieved data here
-                console.log(data["Demand (per month)"]);
+                // Handle the retrieved data here 
                 setModelData({
                     Crop: crop,
                     Type: 'current',
                     Region: region,
-                    Data: [data["Price (per Kg)"], data["Demand (per month)"], data["Supply  (per month)"]]
+                    Data: [data.Price, data.Demand, data.Supply]
                 })
                 setShowConditions(true)
             } else {
@@ -60,65 +58,68 @@ const CurrentMarket = (props) => {
             console.error(error);
             if (error.response) {
                 // The request was made and the server responded with a status code
-                // that falls out of the range of 2xx
-                console.log(error.response.data);
-                console.log(error.response.status);
-                console.log(error.response.headers);
+                // that falls out of the range of 2xx 
                 Alert.alert("Error", error.response.data.error || "Failed to retrieve data. Please try again.");
             } else if (error.request) {
-                // The request was made but no response was received
-                console.log(error.request);
+                // The request was made but no response was received 
                 Alert.alert("Error", "No response received from server. Please try again.");
             } else {
-                // Something happened in setting up the request that triggered an Error
-                console.log("Error", error.message);
+                // Something happened in setting up the request that triggered an Error 
                 Alert.alert("Error", "Failed to retrieve data. Please try again.");
             }
         }
     };
 
+    useEffect(() => { 
+        if (showConditions == false) {
+            setCrops([''])
+            setRegions([''])
+            setRegion('')
+            setCrop('')
+        }
+    }, [showConditions])
 
     useEffect(() => {
-        if (!setShowConditions) {
-            setCrop('')
-            setRegion('')
-        }
-    }, [setShowConditions])
+        setCrops([
+            `Capsicum`,
+            `Green Chilli`
+        ])
+        setRegions([
+            'Colombo',
+            'Gampaha',
+            'Kalutara',
+            'Kandy',
+            'Matale',
+            'Nuwara Eliya',
+            'Galle',
+            'Matara',
+            'Hambantota',
+            'Jaffna',
+            'Kilinochchi',
+            'Mannar',
+            'Vavuniya',
+            'Mullaitivu',
+            'Batticaloa',
+            'Ampara',
+            'Trincomalee',
+            'Kurunegala',
+            'Puttalam',
+            'Anuradhapura',
+            'Polonnaruwa',
+            'Badulla',
+            'Moneragala',
+            'Ratnapura',
+            'Kegalle',
+        ])
 
-    const regions = [
-        'Colombo',
-        'Gampaha',
-        'Kalutara',
-        'Kandy',
-        'Matale',
-        'Nuwara Eliya',
-        'Galle',
-        'Matara',
-        'Hambantota',
-        'Jaffna',
-        'Kilinochchi',
-        'Mannar',
-        'Vavuniya',
-        'Mullaitivu',
-        'Batticaloa',
-        'Ampara',
-        'Trincomalee',
-        'Kurunegala',
-        'Puttalam',
-        'Anuradhapura',
-        'Polonnaruwa',
-        'Badulla',
-        'Moneragala',
-        'Ratnapura',
-        'Kegalle',
-    ];
+    }, [])
 
     return (
         <>
             <View style={styles.container}>
                 <SelectionDropdown
                     Label="Select Crop"
-                    List={[`Capsicum`, `Green Chilli`]}
+                    List={crops}
                     Selected={handleCropChange}
                     expand={true}
                 />

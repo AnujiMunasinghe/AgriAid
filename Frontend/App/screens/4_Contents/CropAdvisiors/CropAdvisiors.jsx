@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Receivers from '../../../components/messages/Receivers';
-const socket = io.connect("http://192.168.1.3:3001")
+const socket = io.connect("http://192.168.43.134:3001")
 
 import {
     Alert,

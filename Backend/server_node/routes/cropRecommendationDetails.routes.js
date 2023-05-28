@@ -23,6 +23,8 @@ router.get("/crop-recommendation-details/all", async (req, res) => {
 router.get("/crop-recommendation-details", async (req, res) => {
     const { region, quatar } = req.query;
 
+    console.log(region, quatar);
+
     try {
         // Find data based on region and crop
         const data = await CropRecommendationDetails.findOne({ Region: region, Quatar: quatar });

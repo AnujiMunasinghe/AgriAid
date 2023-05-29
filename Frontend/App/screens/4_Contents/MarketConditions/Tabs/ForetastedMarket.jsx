@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import Axios from "axios";
+import { React, useEffect, useState } from 'react';
 import {
     Alert,
     StyleSheet,
@@ -31,26 +32,68 @@ const ForetastedMarket = (props) => {
     };
 
     const handleEnterPress = async () => {
-        // const cropData = {
-        //     name: crop,
-        //     region: region,
-        //     quarter: quarter,
-        //     type: 'foretasted'
-        // }
+        let cropData = crop
+        let regionData = region
+        let quarterData = quarter
 
-        // await props.posting_Data(cropData)
-
-        if (!crop || !region || !quarter) {
+        if (!cropData || !regionData || !quarterData) {
             Alert.alert('Error', 'Please fill in all required fields')
             return
         }
-        setModelData({
-            Crop: crop,
-            Type: 'forecasted',
+
+        switch (crop) {
+            case "Capsicum (Prarthana)":
+                cropData = "Capsicum"
+                break;
+            case "Chili (MI-CH-HY 01)":
+                cropData = "Green Chilli"
+                break;
+
+            default:
+                break;
+        }
+
+        switch (quarter) {
+            case "May - August 2023":
+                quarterData = "Q1"
+                break;
+            case "September - December 2023":
+                quarterData = "Q2"
+                break;
+            case "January - April 2024":
+                quarterData = "Q3"
+                break;
+
+            default:
+                break;
+        }
+
+        Axios.post('http://192.168.1.4:5000/predict', {
             Region: region,
-            Data: [0, 0, 0]
+            Quarter: quarterData,
+            Crop: cropData
         })
-        setShowConditions(true)
+            .then(response => {
+                // Handle the API response here
+                console.log(response.data);
+                setModelData({
+                    Crop: crop,
+                    Type: 'forecasted',
+                    Region: region,
+                    Data: [
+                        (response.data.Price * 1000).toFixed(2),     // Multiply by 1000 and format to 2 decimal points
+                        (response.data.Demand * 100).toFixed(2),     // Multiply by 100 and format to 2 decimal points
+                        (response.data.Supply * 100).toFixed(2)      // Multiply by 100 and format to 2 decimal points
+                    ]
+                })
+                setShowConditions(true)
+            })
+            .catch(error => {
+                // Handle any error that occurs during the API call
+                console.error(error);
+            });
+
+
     }
 
     useEffect(() => {

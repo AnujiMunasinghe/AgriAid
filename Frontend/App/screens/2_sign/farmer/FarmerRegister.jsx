@@ -78,7 +78,7 @@ const FarmerRegister = ({ navigation }) => {
         };
 
         try {
-            const response = await Axios.post("http://192.168.1.3:8000/register", newUser);
+            const response = await Axios.post("http://192.168.1.4:8000/register", newUser);
             if (response.status === 201) {
                 Alert.alert("Success", "User registered successfully.");
                 navigation.navigate('FarmerLogin', route.params)

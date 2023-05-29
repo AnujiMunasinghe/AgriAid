@@ -1,0 +1,151 @@
+﻿Crop,Region,Demand (Kg),Supply  (Kg),Price (Rs),Quarter
+Capsicum,Ampara,180415,185348,480,Q1
+Capsicum,Ampara,954738,93650,530,Q2
+Capsicum,Ampara,97688,96666,850,Q3
+Green Chilli,Ampara,203225,198245,680,Q1
+Green Chilli,Ampara,234835,230465,330,Q2
+Green Chilli,Ampara,230125,228905,595,Q3
+Capsicum,Anuradhapura,125935,124534,840,Q1
+Capsicum,Anuradhapura,120924,118230,860,Q2
+Capsicum,Anuradhapura,128524,122850,815,Q3
+Green Chilli,Anuradhapura,215263,213567,684,Q1
+Green Chilli,Anuradhapura,198832,195786,280,Q2
+Green Chilli,Anuradhapura,252759,249627,440,Q3
+Capsicum,Badulla,86760,98587,900,Q1
+Capsicum,Badulla,124330,110764,888,Q2
+Capsicum,Badulla,100245,98324,865,Q3
+Green Chilli,Badulla,198810,195786,760,Q1
+Green Chilli,Badulla,253880,250764,320,Q2
+Green Chilli,Badulla,221935,219887,460,Q3
+Capsicum,Batticaloa,124330,110764,792,Q1
+Capsicum,Batticaloa,144523,129250,800,Q2
+Capsicum,Batticaloa,128493,126644,800,Q3
+Green Chilli,Batticaloa,224235,221567,480,Q1
+Green Chilli,Batticaloa,245384,242378,530,Q2
+Green Chilli,Batticaloa,243374,242878,400,Q3
+Capsicum,Colombo,105800,100800,924,Q1
+Capsicum,Colombo,128340,127983,1003,Q2
+Capsicum,Colombo,142500,130700,830,Q3
+Green Chilli,Colombo,215263,213567,647,Q1
+Green Chilli,Colombo,248274,244835,358,Q2
+Green Chilli,Colombo,240174,238735,657,Q3
+Capsicum,Galle,128340,127983,730,Q1
+Capsicum,Galle,99245,98564,937,Q2
+Capsicum,Galle,123502,120754,777,Q3
+Green Chilli,Galle,253830,250764,480,Q1
+Green Chilli,Galle,234835,230465,292,Q2
+Green Chilli,Galle,233810,220964,424,Q3
+Capsicum,Gampaha,105835,103456,1000,Q1
+Capsicum,Gampaha,128456,124679,1060,Q2
+Capsicum,Gampaha,118200,112333,825,Q3
+Green Chilli,Gampaha,198832,195786,720,Q1
+Green Chilli,Gampaha,253830,250764,364,Q2
+Green Chilli,Gampaha,199807,196986,460,Q3
+Capsicum,Hambantota,144523,129250,786,Q1
+Capsicum,Hambantota,99847,115670,740,Q2
+Capsicum,Hambantota,133346,131540,764,Q3
+Green Chilli,Hambantota,245424,242378,550,Q1
+Green Chilli,Hambantota,248905,246284,360,Q2
+Green Chilli,Hambantota,246905,244214,498,Q3
+Capsicum,Jaffna,97309,95345,841,Q1
+Capsicum,Jaffna,105835,103456,786,Q2
+Capsicum,Jaffna,93263,88460,746,Q3
+Green Chilli,Jaffna,253880,250764,431,Q1
+Green Chilli,Jaffna,237394,234856,140,Q2
+Green Chilli,Jaffna,248336,239893,315,Q3
+Capsicum,Kalutara,124512,59473,788,Q1
+Capsicum,Kalutara,130720,102453,944,Q2
+Capsicum,Kalutara,122476,119479,866,Q3
+Green Chilli,Kalutara,255836,248637,675,Q1
+Green Chilli,Kalutara,230492,228356,232,Q2
+Green Chilli,Kalutara,232592,229856,434,Q3
+Capsicum,Kandy,131356,130240,980,Q1
+Capsicum,Kandy,97309,95345,950,Q2
+Capsicum,Kandy,119560,117100,860,Q3
+Green Chilli,Kandy,177759,173678,720,Q1
+Green Chilli,Kandy,225884,222934,284,Q2
+Green Chilli,Kandy,162219,143638,492,Q3
+Capsicum,Kegalle,112338,110345,792,Q1
+Capsicum,Kegalle,112398,110345,792,Q2
+Capsicum,Kegalle,115278,112725,684,Q3
+Green Chilli,Kegalle,250356,233333,538,Q1
+Green Chilli,Kegalle,222937,219245,384,Q2
+Green Chilli,Kegalle,220957,219215,484,Q3
+Capsicum,Kilinochchi,130493,128654,800,Q1
+Capsicum,Kilinochchi,125935,124534,800,Q2
+Capsicum,Kilinochchi,83320,79824,802,Q3
+Green Chilli,Kilinochchi,212937,219245,530,Q1
+Green Chilli,Kilinochchi,222937,219245,220,Q2
+Green Chilli,Kilinochchi,202475,195448,404,Q3
+Capsicum,Kurunegala,112398,110345,792,Q1
+Capsicum,Kurunegala,130493,128654,980,Q2
+Capsicum,Kurunegala,125300,122250,892,Q3
+Green Chilli,Kurunegala,209713,266865,776,Q1
+Green Chilli,Kurunegala,174759,173678,350,Q2
+Green Chilli,Kurunegala,212883,263755,482,Q3
+Capsicum,Mannar,67930,78954,800,Q1
+Capsicum,Mannar,111500,117240,800,Q2
+Capsicum,Mannar,100309,95385,780,Q3
+Green Chilli,Mannar,209430,266865,536,Q1
+Green Chilli,Mannar,202394,199227,340,Q2
+Green Chilli,Mannar,198494,195227,450,Q3
+Capsicum,Matala,145263,213567,420,Q1
+Capsicum,Matala,117294,115284,530,Q2
+Capsicum,Matala,119281,114220,830,Q3
+Green Chilli,Matala,164374,180345,510,Q1
+Green Chilli,Matala,184374,180345,325,Q2
+Green Chilli,Matala,211345,208285,430,Q3
+Capsicum,Matara,954738,93650,785,Q1
+Capsicum,Matara,67930,78954,875,Q2
+Capsicum,Matara,115224,112842,845,Q3
+Green Chilli,Matara,253880,250764,612,Q1
+Green Chilli,Matara,209713,266865,260,Q2
+Green Chilli,Matara,232395,221798,512,Q3
+Capsicum,Monaragala,125935,124534,824,Q1
+Capsicum,Monaragala,125935,124534,870,Q2
+Capsicum,Monaragala,127885,124724,770,Q3
+Green Chilli,Monaragala,212380,210567,788,Q1
+Green Chilli,Monaragala,224884,222934,240,Q2
+Green Chilli,Monaragala,222894,220134,440,Q3
+Capsicum,Mullaitivu,120924,118230,706,Q1
+Capsicum,Mullaitivu,954738,93650,800,Q2
+Capsicum,Mullaitivu,72210,63433,816,Q3
+Green Chilli,Mullaitivu,225884,222934,516,Q1
+Green Chilli,Mullaitivu,224884,222934,226,Q2
+Green Chilli,Mullaitivu,225163,214867,406,Q3
+Capsicum,Nuwara Eliya,125835,103456,824,Q1
+Capsicum,Nuwara Eliya,105835,103456,850,Q2
+Capsicum,Nuwara Eliya,111835,110226,750,Q3
+Green Chilli,Nuwara Eliya,218333,215267,696,Q1
+Green Chilli,Nuwara Eliya,184374,180345,316,Q2
+Green Chilli,Nuwara Eliya,182374,178375,470,Q3
+Capsicum,Polonnaruwa,109543,115670,760,Q1
+Capsicum,Polonnaruwa,124512,59473,886,Q2
+Capsicum,Polonnaruwa,123827,120580,887,Q3
+Green Chilli,Polonnaruwa,174340,173678,656,Q1
+Green Chilli,Polonnaruwa,215263,213567,254,Q2
+Green Chilli,Polonnaruwa,228635,224156,604,Q3
+Capsicum,Puttalam,99245,98564,840,Q1
+Capsicum,Puttalam,131356,130240,980,Q2
+Capsicum,Puttalam,98432,92450,800,Q3
+Green Chilli,Puttalam,200415,185348,752,Q1
+Green Chilli,Puttalam,170428,160367,304,Q2
+Green Chilli,Puttalam,175828,166397,476,Q3
+Capsicum,Ratnapura,111500,117240,768,Q1
+Capsicum,Ratnapura,105994,130800,972,Q2
+Capsicum,Ratnapura,122924,119130,776,Q3
+Green Chilli,Ratnapura,202394,199227,700,Q1
+Green Chilli,Ratnapura,218283,215267,460,Q2
+Green Chilli,Ratnapura,218183,215367,514,Q3
+Capsicum,Trincomalee,130720,102453,744,Q1
+Capsicum,Trincomalee,119887,102450,800,Q2
+Capsicum,Trincomalee,130340,127973,646,Q3
+Green Chilli,Trincomalee,230282,228356,576,Q1
+Green Chilli,Trincomalee,237394,234856,202,Q2
+Green Chilli,Trincomalee,232994,231886,372,Q3
+Capsicum,Vavuniya,128456,124679,680,Q1
+Capsicum,Vavuniya,112398,110345,718,Q2
+Capsicum,Vavuniya,128633,108487,940,Q3
+Green Chilli,Vavuniya,248905,246284,464,Q1
+Green Chilli,Vavuniya,248905,246284,180,Q2
+Green Chilli,Vavuniya,221345,219477,400,Q3

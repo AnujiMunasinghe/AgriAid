@@ -10,7 +10,7 @@ chatRoom(server)
 const clusterURL = "mongodb+srv://admin:i5T3X5lWOSCj32ii@cluster0.5oe0dnt.mongodb.net/?retryWrites=true&w=majority";
 const PORT = 8000;
 const CHAT_PORT = 3001;
-const IP_ADDRESS = "192.168.1.3";
+const IP_ADDRESS = "192.168.1.4";
 
 // Middleware
 app.use(cors());
@@ -29,8 +29,8 @@ app.use("/", require("./routes/users.routes"));
 app.use("/", require("./routes/CropData_Route"));
 app.use("/", require("./routes/Cultivation_Route"));
 app.use("/", require("./routes/HarvestRecord_Route"));
-app.use("/", require("./routes/realData.routes"));
-
+app.use("/", require("./routes/realCropDetails.routes"));
+app.use("/", require("./routes/cropRecommendationDetails.routes"));
 
 // Server listening
 app.listen(PORT, IP_ADDRESS, () => console.log(`App running on http://${IP_ADDRESS}:${PORT}`));

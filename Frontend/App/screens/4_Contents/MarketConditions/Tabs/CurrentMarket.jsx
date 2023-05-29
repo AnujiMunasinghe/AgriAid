@@ -1,8 +1,9 @@
+import Axios from "axios";
 import React, { useEffect, useState } from 'react';
 import {
+    Alert,
     StyleSheet,
-    View,
-    Alert
+    View
 } from 'react-native';
 import PositiveButton from '../../../../components/buttons/PositiveButton';
 import MarketGrid from '../../../../components/grids/MarketGrid';
@@ -12,9 +13,11 @@ const CurrentMarket = (props) => {
     const [crop, setCrop] = useState('');
     const [region, setRegion] = useState('');
 
+    const [crops, setCrops] = useState([])
+    const [regions, setRegions] = useState([])
+
     const [showConditions, setShowConditions] = useState(false)
     const [modelData, setModelData] = useState()
-
 
     const handleCropChange = (crop) => {
         setCrop(crop);
@@ -24,69 +27,109 @@ const CurrentMarket = (props) => {
         setRegion(region);
     };
 
-    const handleEnterPress = () => {
-        // Handle enter button press here
-        // const cropData = {
-        //     name: crop,
-        //     region: region,
-        //     type: 'current'
-        // }
-
-        // await props.posting_Data(cropData)
+    const handleEnterPress = async () => {
         if (!crop || !region) {
-            Alert.alert('Error', 'Please fill in all required fields')
-            return
+            Alert.alert('Error', 'Please fill in all required fields');
+            return;
         }
-        setModelData({
-            Crop: crop,
-            Type: 'current',
-            Region: region,
-            Data: [0, 0, 0]
-        })
-        setShowConditions(true)
+
+        try {
+            const response = await Axios.get("http://192.168.1.4:8000/real-crop-details", {
+                params: {
+                    region: region,
+                    crop: crop
+                }
+            });
+
+            // const requestBody = {
+            //     Region: "Colombo",
+            //     Quarter: "Q1",
+            //     Crop: "Capsicum"
+            // };
+
+            // const responseData = await Axios.post('http://127.0.0.1:5000/predict', requestBody);
+
+            // console.log(responseData);
+
+            if (response.status === 200) {
+                const data = response.data;
+                // Handle the retrieved data here 
+                setModelData({
+                    Crop: crop,
+                    Type: 'current',
+                    Region: region,
+                    Data: [data.Price, data.Demand, data.Supply]
+                })
+                setShowConditions(true)
+            } else {
+                Alert.alert("Error", "Failed to retrieve data. Please try again.");
+            }
+        } catch (error) {
+            console.error(error);
+            if (error.response) {
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx 
+                Alert.alert("Error", error.response.data.error || "Failed to retrieve data. Please try again.");
+            } else if (error.request) {
+                // The request was made but no response was received 
+                Alert.alert("Error", "No response received from server. Please try again.");
+            } else {
+                // Something happened in setting up the request that triggered an Error 
+                Alert.alert("Error", "Failed to retrieve data. Please try again.");
+            }
+        }
     };
 
     useEffect(() => {
-        if (!setShowConditions) {
-            setCrop('')
+        if (showConditions == false) {
+            setCrops([''])
+            setRegions([''])
             setRegion('')
+            setCrop('')
         }
-    }, [setShowConditions])
+    }, [showConditions])
 
-    const regions = [
-        'Colombo',
-        'Gampaha',
-        'Kalutara',
-        'Kandy',
-        'Matale',
-        'Nuwara Eliya',
-        'Galle',
-        'Matara',
-        'Hambantota',
-        'Jaffna',
-        'Kilinochchi',
-        'Mannar',
-        'Vavuniya',
-        'Mullaitivu',
-        'Batticaloa',
-        'Ampara',
-        'Trincomalee',
-        'Kurunegala',
-        'Puttalam',
-        'Anuradhapura',
-        'Polonnaruwa',
-        'Badulla',
-        'Moneragala',
-        'Ratnapura',
-        'Kegalle',
-    ];
+    useEffect(() => {
+        setCrops([
+            `Capsicum`,
+            `Green Chilli`
+        ])
+        setRegions([
+            'Colombo',
+            'Gampaha',
+            'Kalutara',
+            'Kandy',
+            'Matale',
+            'Nuwara Eliya',
+            'Galle',
+            'Matara',
+            'Hambantota',
+            'Jaffna',
+            'Kilinochchi',
+            'Mannar',
+            'Vavuniya',
+            'Mullaitivu',
+            'Batticaloa',
+            'Ampara',
+            'Trincomalee',
+            'Kurunegala',
+            'Puttalam',
+            'Anuradhapura',
+            'Polonnaruwa',
+            'Badulla',
+            'Moneragala',
+            'Ratnapura',
+            'Kegalle',
+        ])
+
+    }, []) 
 
     return (
         <>
             <View style={styles.container}>
                 <SelectionDropdown
                     Label="Select Crop"
-                    List={props.CropList}
+                    List={crops}
                     Selected={handleCropChange}
                     expand={true}
                 />

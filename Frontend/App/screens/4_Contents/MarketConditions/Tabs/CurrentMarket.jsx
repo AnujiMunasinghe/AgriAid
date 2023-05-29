@@ -41,6 +41,16 @@ const CurrentMarket = (props) => {
                 }
             });
 
+            // const requestBody = {
+            //     Region: "Colombo",
+            //     Quarter: "Q1",
+            //     Crop: "Capsicum"
+            // };
+
+            // const responseData = await Axios.post('http://127.0.0.1:5000/predict', requestBody);
+
+            // console.log(responseData);
+
             if (response.status === 200) {
                 const data = response.data;
                 // Handle the retrieved data here 
@@ -70,7 +80,7 @@ const CurrentMarket = (props) => {
         }
     };
 
-    useEffect(() => { 
+    useEffect(() => {
         if (showConditions == false) {
             setCrops([''])
             setRegions([''])
@@ -112,7 +122,7 @@ const CurrentMarket = (props) => {
             'Kegalle',
         ])
 
-    }, [])
+    }, []) 
 
     return (
         <>

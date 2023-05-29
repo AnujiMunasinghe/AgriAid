@@ -78,7 +78,7 @@ const CropRecommendations = () => {
         }
 
         try {
-            const response = await Axios.get("http://192.168.43.134:8000/crop-recommendation-details", {
+            const response = await Axios.get("http://192.168.1.4:8000/crop-recommendation-details", {
                 params: {
                     region: region,
                     quatar: quatar

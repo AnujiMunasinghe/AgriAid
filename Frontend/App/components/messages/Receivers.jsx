@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import AppUser from '../../StaticData/AppUser';
-const socket = io.connect("http://192.168.43.134:3001")
+const socket = io.connect("http://192.168.1.4:3001")
 
 import {
     Image,

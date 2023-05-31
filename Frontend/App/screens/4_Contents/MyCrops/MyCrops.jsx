@@ -13,6 +13,7 @@ import {
 
 import AppUser from '../../../StaticData/AppUser';
 import SelectedCrop from '../../../StaticData/SelectedCrop';
+import FiveColumn from '../../../components/grids/FiveColumn';
 import ThreeColumn from '../../../components/grids/ThreeColumn';
 import BodyHeader from '../../../components/headers/BodyHeader';
 import ActionPopup from '../../../components/popups/ActionPopup';
@@ -158,21 +159,29 @@ const MyCrops = ({ navigation }) => {
             <View style={{ marginHorizontal: 7 }}>
                 <Text style={styles.text}>Crop Cultivation History</Text>
                 <View style={styles.grid}>
-                    <ThreeColumn
+                    <FiveColumn
                         Col_1='Crop'
-                        Col_2='Cultivation Start Date'
-                        Col_3='Harvested Date'>
-                    </ThreeColumn>
+                        Col_2='Quantity'
+                        Col_3='Quality'
+                        Col_4='Cultivation Date'
+                        Col_5='Harvested Date'
+                    >
+                    </FiveColumn>
                     <View style={{ height: 300 }}>
                         <ScrollView>
-                            {records.map((record, index) => (
-                                <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 2, marginBottom: 7 }} key={index}>
-                                    {/* <Text style={{ flex: 1, fontWeight: 800 }}>{record.crop}</Text> */}
-                                    <TouchableOpacity onPress={() => plan_Cultivation(record.crop)}><Text style={{ color: 'black', fontWeight: 800, width: 80 }}>{record.crop}</Text></TouchableOpacity>
-                                    <Text style={{ flex: 1 }}>{record.start}</Text>
-                                    <Text style={{ flex: 1 }}>{record.harvested}</Text>
-                                </View>
-                            ))}
+                            {records.map((record, index) => {
+                                console.log(record);
+                                return (
+                                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 2, marginBottom: 7 }} key={index}>
+                                        <Text style={{ width: '18%', fontWeight: 800 }}>{record.crop}</Text>
+                                        {/* <TouchableOpacity onPress={() => plan_Cultivation(record.crop)}><Text style={{ color: 'black', fontWeight: 800, width: 80 }}>{record.crop}</Text></TouchableOpacity> */}
+                                        <Text style={{ width: '15%', textAlign: "center" }}>{record.quantity}</Text>
+                                        <Text style={{ width: '15%', textAlign: "center" }}>{record.quality}</Text>
+                                        <Text style={{ width: '26%', textAlign: "center" }}>{record.start}</Text>
+                                        <Text style={{ width: '26%', textAlign: "center" }}>{record.harvested}</Text>
+                                    </View>
+                                )
+                            })}
                         </ScrollView>
                     </View>
                 </View>

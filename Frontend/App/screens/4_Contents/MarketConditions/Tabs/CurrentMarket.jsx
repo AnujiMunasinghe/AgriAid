@@ -28,16 +28,31 @@ const CurrentMarket = (props) => {
     };
 
     const handleEnterPress = async () => {
-        if (!crop || !region) {
+        let cropData = crop
+
+        if (!cropData || !region) {
             Alert.alert('Error', 'Please fill in all required fields');
             return;
         }
+
+        switch (crop) {
+            case "Capsicum (Prarthana)":
+                cropData = "Capsicum"
+                break;
+            case "Chili (MI-CH-HY 01)":
+                cropData = "Green Chilli"
+                break;
+
+            default:
+                break;
+        }
+
 
         try {
             const response = await Axios.get("http://192.168.1.4:8000/real-crop-details", {
                 params: {
                     region: region,
-                    crop: crop
+                    crop: cropData
                 }
             });
 
@@ -91,8 +106,8 @@ const CurrentMarket = (props) => {
 
     useEffect(() => {
         setCrops([
-            `Capsicum`,
-            `Green Chilli`
+            `Capsicum (Prarthana)`,
+            `Chili (MI-CH-HY 01)`
         ])
         setRegions([
             'Colombo',
@@ -122,7 +137,7 @@ const CurrentMarket = (props) => {
             'Kegalle',
         ])
 
-    }, []) 
+    }, [])
 
     return (
         <>

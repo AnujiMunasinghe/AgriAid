@@ -8,9 +8,9 @@ class SelectedCrop {
 
     fetch() {
         const crop = {
-                        name: __name,
-                     }
-                     
+            name: __name,
+        }
+
         return crop
     }
 }

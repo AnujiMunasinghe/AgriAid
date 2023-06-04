@@ -7,16 +7,16 @@ const dataModel = require("../models/Cultivation_Model")
 router.route("/addCultivation").post((req, res) => {
 
     const mongoDocument = new dataModel({
-        farmer:req.body.farmer,
-        crop:req.body.crop,
-        begin:req.body.begin,
-        end:req.body.end, 
+        farmer: req.body.farmer,
+        crop: req.body.crop,
+        begin: req.body.begin,
+        end: req.body.end,
         status: true
     })
 
     const response = mongoDocument.save()
     response != null ?
-        res.send('1') :res.send('0')
+        res.send('1') : res.send('0')
 })
 
 
@@ -24,7 +24,7 @@ router.route("/addCultivation").post((req, res) => {
 //Get cultivated data
 // router.route("/getCultivation").post( async(req, res) => { 
 //     try {
-        
+
 //         const crops = await dataModel.find({farmer:req.body.farmer})
 
 //         if(crops != null) {
@@ -38,32 +38,32 @@ router.route("/addCultivation").post((req, res) => {
 //     }
 // })
 
-  
+
 router.route("/getCultivation").post(async (req, res) => {
     try {
-      const crops = await dataModel.find({ farmer: req.body.farmer, status: true });
-  
-      if (crops != null) {
-        res.json(crops);
-      }
+        const crops = await dataModel.find({ farmer: req.body.farmer, status: true });
+
+        if (crops != null) {
+            res.json(crops);
+        }
     } catch (error) {
-      res.send('Error: ' + error);
+        res.send('Error: ' + error);
     }
-  });
-  
+});
+
 
 //API-03
 //Remove cultivation
-router.route("/deleteCultivation").post( async(req, res) => { 
-    
+router.route("/deleteCultivation").post(async (req, res) => {
+
     try {
-        
-        const remove = await dataModel.deleteOne({farmer:req.body.farmer, crop:req.body.crop})
+
+        const remove = await dataModel.deleteOne({ farmer: req.body.farmer, crop: req.body.crop })
 
         if (remove.deletedCount === 1) {
             res.status(200).json({ message: "Deleted" });
-        } 
-        
+        }
+
         else {
             res.status(404).json({ message: "Cannot be deleted" });
         }
@@ -71,31 +71,33 @@ router.route("/deleteCultivation").post( async(req, res) => {
     }
 
     catch (error) {
-        res.send('Error: ' +error)
+        res.send('Error: ' + error)
     }
 })
 
 //API-04
 //Get needed crop want farmer
-router.route("/getDate").post( async(req, res) => { 
-    
+router.route("/getDate").post(async (req, res) => {
     try {
-        
-        const data = await dataModel.findOne({farmer:req.body.farmer, crop:req.body.crop})
+        const { farmer, crop, id } = req.body;
 
-        if (data != null) {
-            res.send(data.begin)
-        } 
-        
-        else {
-            res.status(404).json({ message: "System error" });
+        let query = { farmer, crop };
+
+        if (id) {
+            query._id = id;
         }
 
-    }
+        const data = await dataModel.findOne(query);
 
-    catch (error) {
-        res.send('Error: ' +error)
+        if (data != null) {
+            res.send(data.begin);
+        } else {
+            res.status(404).json({ message: "System error" });
+        }
+    } catch (error) {
+        res.send("Error: " + error);
     }
-})
+});
+
 
 module.exports = router

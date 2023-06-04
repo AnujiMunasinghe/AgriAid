@@ -17,6 +17,8 @@ import Monitoring from './TrackerTabs/Monitoring';
 const GrowthTracker = () => {
 
     const [crop, setCrop] = useState('')
+    const [cultivationId, setCultivationId] = useState('')
+
     const [leftTab, setLeftTab] = useState(false)
     const [error, setError] = useState(false)
     const [data, setData] = useState(false)
@@ -38,6 +40,7 @@ const GrowthTracker = () => {
     useEffect(() => {
         const selected_crop = new SelectedCrop
         setCrop(selected_crop.fetch().name)
+        setCultivationId(selected_crop.fetch().id)
         setData(true)
     }, []);
 
@@ -47,7 +50,8 @@ const GrowthTracker = () => {
                 const app_user = new AppUser
                 const needed = {
                     farmer: app_user.fetch().id,
-                    crop: crop
+                    crop: crop,
+                    id: cultivationId
                 }
 
                 const request = new Request

@@ -56,7 +56,7 @@ const ProfMgmt = () => {
         setSelect(true)
     }
 
-    const approve_Request = (id) => { 
+    const approve_Request = (id) => {
         setReload(false)
 
         const popup = {
@@ -186,7 +186,7 @@ const ProfMgmt = () => {
                                         </TouchableOpacity>
                                     </View>
                                     {index == element && select == true && (
-                                        <View style={{ display: 'flex', alignItems: 'flex-end' }}>
+                                        <View style={{ display: 'flex', alignItems: 'flex-end', position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1 }}>
                                             <View style={styles.optionsBar}>
                                                 <TouchableOpacity onPress={() => approve_Request(person.id)} style={{ display: 'flex', alignItems: 'center' }}>
                                                     <Text style={styles.approve}>APPROVE</Text>

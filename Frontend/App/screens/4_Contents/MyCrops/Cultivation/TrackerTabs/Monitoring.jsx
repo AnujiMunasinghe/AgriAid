@@ -194,7 +194,9 @@ const Monitoring = (props) => {
         beginDate = moment(beginDate).startOf('day');
         endDate = moment(endDate).startOf('day');
 
-        if (currentDate.isBetween(beginDate, endDate)) {
+        if (currentDate.isSame(beginDate) || currentDate.isSame(endDate)) {
+            return 'ongoing';
+        } else if (currentDate.isBetween(beginDate, endDate)) {
             return 'ongoing';
         } else if (currentDate.isBefore(beginDate)) {
             return 'pending';

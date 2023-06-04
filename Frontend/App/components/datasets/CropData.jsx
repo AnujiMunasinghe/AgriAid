@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 
 const CropData = (props) => {
-
+    console.log("here", props);
     return (
         <View style={styles.container}>
             <Image

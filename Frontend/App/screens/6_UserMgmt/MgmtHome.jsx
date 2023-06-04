@@ -19,7 +19,7 @@ const MgmtHome = ({ navigation }) => {
                     press_Action={() => navigation.navigate('FarmerMgmt')}>
                 </SquareButton>
                 <SquareButton
-                    Title_1="Agricultural"
+                    Title_1="Professionals"
                     Title_2="Management"
                     press_Action={() => navigation.navigate('ProfMgmt')}>
                 </SquareButton>

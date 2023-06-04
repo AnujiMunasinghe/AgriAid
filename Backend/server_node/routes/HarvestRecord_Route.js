@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const dataModel = require("../models/HarvestRecord_Model")
+const dataModelCultivation = require("../models/Cultivation_Model")
+
 
 //API-01
 //save harvested record data
 router.route("/record").post(async (req, res) => {
-
     try {
         const harvest_Record = new dataModel({
             farmer: req.body.farmer,
@@ -13,19 +14,36 @@ router.route("/record").post(async (req, res) => {
             start: req.body.start,
             harvested: req.body.harvested,
             quantity: req.body.quantity,
-            quality: req.body.quality
-        })
+            quality: req.body.quality,
+        });
 
-        const response = await harvest_Record.save()
-        response != null ?
-            res.send('1') : res.send('0')
+        const response = await harvest_Record.save();
 
+        if (response != null) {
+            const cultivationId = req.body.cultivationId;
+
+            if (cultivationId) {
+                const cultivationRecord = await dataModelCultivation.findByIdAndUpdate(
+                    cultivationId,
+                    { status: false }
+                );
+
+                if (cultivationRecord) {
+                    res.send('1');
+                } else {
+                    res.send('0');
+                }
+            } else {
+                res.send('0');
+            }
+        } else {
+            res.send('0');
+        }
+    } catch (error) {
+        res.send('Error: ' + error);
     }
+});
 
-    catch (error) {
-        res.send('Error: ' + error)
-    }
-})
 
 // API-02
 // Get record list by farmer ID

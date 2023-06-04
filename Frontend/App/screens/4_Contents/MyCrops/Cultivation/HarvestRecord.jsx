@@ -20,10 +20,13 @@ import NegativeButton from '../../../../components/buttons/NegativeButton';
 import PositiveButton from '../../../../components/buttons/PositiveButton';
 import BodyHeader from '../../../../components/headers/BodyHeader';
 import SelectionDropdown from '../../../../components/inputs/SelectionDropdown';
+import { CommonActions } from '@react-navigation/native';
 
 const HarvestRecord = ({ navigation }) => {
 
     const [crop, setCrop] = useState('')
+    const [cultivationId, setCultivationId] = useState('')
+
     const [startedDate, setStartedDate] = useState('')
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [calender, setCalender] = useState(false)
@@ -34,12 +37,12 @@ const HarvestRecord = ({ navigation }) => {
 
     const [fieldState, setFieldState] = useState(true)
 
-    const get_StartedDate = async (choosed) => {
+    const get_StartedDate = async (choosed, id) => {
         const app_user = new AppUser
 
         try {
             const request = new Request
-            const response = await request.GrowedCrop({ farmer: app_user.fetch().id, crop: choosed })
+            const response = await request.GrowedCrop({ farmer: app_user.fetch().id, crop: choosed, id: id })
             const date = new Date(response.data)
             const dateString = date.toISOString().slice(0, 10)
             setStartedDate(dateString)
@@ -107,7 +110,8 @@ const HarvestRecord = ({ navigation }) => {
                 start: startedDate,
                 harvested: complete.toISOString().slice(0, 10),
                 quantity: quantity,
-                quality: quality
+                quality: quality,
+                cultivationId: cultivationId
             }
 
             try {
@@ -118,7 +122,16 @@ const HarvestRecord = ({ navigation }) => {
                 setQuantity(0)
                 setQuality('')
                 setHarvested('Pick a date')
-                navigation.navigate('MyCrops')
+                // navigation.navigate('MyCrops')
+                navigation.dispatch(
+                    CommonActions.reset({
+                      index: 1,
+                      routes: [
+                        { name: 'GrowthTrack' }, // Assuming 'Home' is the initial route
+                        { name: 'MyCrops' }, // Navigate to 'MyCrops' page
+                      ],
+                    })
+                  );
             }
 
             catch (err) {
@@ -130,8 +143,9 @@ const HarvestRecord = ({ navigation }) => {
     useEffect(() => {
         const selected_crop = new SelectedCrop
         setCrop(selected_crop.fetch().name)
+        setCultivationId(selected_crop.fetch().id)
 
-        get_StartedDate(selected_crop.fetch().name)
+        get_StartedDate(selected_crop.fetch().name, selected_crop.fetch().id)
     }, []);
 
     return (

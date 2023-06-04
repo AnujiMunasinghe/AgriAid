@@ -1,16 +1,19 @@
 class SelectedCrop {
 
     static __name;
+    static __id; // Add a static __id property
 
-    SelectedCrop(name) {
-        __name = name
+    SelectedCrop(id, name) {
+        __name = name;
+        __id = id;
     }
 
     fetch() {
         const crop = {
-                        name: __name,
-                     }
-                     
+            name: __name,
+            id: __id
+        }
+
         return crop
     }
 }

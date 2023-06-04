@@ -10,7 +10,8 @@ router.route("/addCultivation").post((req, res) => {
         farmer:req.body.farmer,
         crop:req.body.crop,
         begin:req.body.begin,
-        end:req.body.end,
+        end:req.body.end, 
+        status: true
     })
 
     const response = mongoDocument.save()
@@ -21,22 +22,35 @@ router.route("/addCultivation").post((req, res) => {
 
 //API-02
 //Get cultivated data
-router.route("/getCultivation").post( async(req, res) => { 
-    try {
+// router.route("/getCultivation").post( async(req, res) => { 
+//     try {
         
-        const crops = await dataModel.find({farmer:req.body.farmer})
+//         const crops = await dataModel.find({farmer:req.body.farmer})
 
-        if(crops != null) {
-            res.json(crops)
-        }
+//         if(crops != null) {
+//             res.json(crops)
+//         }
 
+//     }
+
+//     catch (error) {
+//         res.send('Error: ' +error)
+//     }
+// })
+
+  
+router.route("/getCultivation").post(async (req, res) => {
+    try {
+      const crops = await dataModel.find({ farmer: req.body.farmer, status: true });
+  
+      if (crops != null) {
+        res.json(crops);
+      }
+    } catch (error) {
+      res.send('Error: ' + error);
     }
-
-    catch (error) {
-        res.send('Error: ' +error)
-    }
-})
-
+  });
+  
 
 //API-03
 //Remove cultivation

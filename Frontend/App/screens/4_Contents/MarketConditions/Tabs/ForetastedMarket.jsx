@@ -82,9 +82,9 @@ const ForetastedMarket = (props) => {
                     Type: 'forecasted',
                     Region: region,
                     Data: [
-                        (response.data.Price * 1000).toFixed(2),     // Multiply by 1000 and format to 2 decimal points
-                        (response.data.Demand * 100).toFixed(2),     // Multiply by 100 and format to 2 decimal points
-                        (response.data.Supply * 100).toFixed(2)      // Multiply by 100 and format to 2 decimal points
+                        (response.data.Price * 1).toFixed(2),     // Multiply by 1000 and format to 2 decimal points
+                        (response.data.Demand * 1).toFixed(2),     // Multiply by 100 and format to 2 decimal points
+                        (response.data.Supply * 1).toFixed(2)      // Multiply by 100 and format to 2 decimal points
                     ]
                 })
                 setShowConditions(true)

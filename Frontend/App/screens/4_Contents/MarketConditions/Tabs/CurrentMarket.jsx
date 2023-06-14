@@ -49,7 +49,7 @@ const CurrentMarket = (props) => {
 
 
         try {
-            const response = await Axios.get("http://192.168.1.4:8000/real-crop-details", {
+            const response = await Axios.get("http://192.168.1.5:8000/real-crop-details", {
                 params: {
                     region: region,
                     crop: cropData

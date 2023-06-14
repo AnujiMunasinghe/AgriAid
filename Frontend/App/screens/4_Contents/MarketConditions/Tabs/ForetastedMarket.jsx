@@ -69,7 +69,7 @@ const ForetastedMarket = (props) => {
         }
 
         console.log("here");
-        Axios.post('http://192.168.1.4:5000/predict', {
+        Axios.post('http://192.168.1.5:5000/predict', {
             Region: region,
             Quarter: quarterData,
             Crop: cropData

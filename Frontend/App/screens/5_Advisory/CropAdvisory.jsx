@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AppUser from '../../StaticData/AppUser';
 import io from 'socket.io-client';
-const socket = io.connect("http://192.168.1.4:3001")
+const socket = io.connect("http://192.168.1.5:3001")
 
 import {
   StyleSheet,
